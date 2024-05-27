@@ -1,0 +1,22 @@
+<?xml version=""1.0"" encoding=""UTF-8""?>
+<kml smlns=""http://earth.google.com/kml/2.0"">
+<Document>
+<LookAt>
+<longitude>-47.412102</longitude>
+<latitude>-20.523676</latitude>
+<range>118080.000000</range>
+<tilt>0.000000</tilt>
+<heading>0.000000</heading>
+</LookAt>
+<GroundOverlay>
+<name>franca05.tif</name>
+<Icon><href>franca05.tif</href></Icon>
+<LatLonBox>
+<north>-20.455694</north>
+<east>-47.341279</east>
+<south>-20.591837</south>
+<west>-47.482729</west>
+</LatLonBox>
+</GroundOverlay>
+</Document>
+</kml>

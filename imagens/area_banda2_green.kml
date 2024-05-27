@@ -1,0 +1,22 @@
+<?xml version=""1.0"" encoding=""UTF-8""?>
+<kml smlns=""http://earth.google.com/kml/2.0"">
+<Document>
+<LookAt>
+<longitude>-47.400717</longitude>
+<latitude>-20.538589</latitude>
+<range>170432.000000</range>
+<tilt>0.000000</tilt>
+<heading>0.000000</heading>
+</LookAt>
+<GroundOverlay>
+<name>area_banda2.tif</name>
+<Icon><href>area_banda2.tif</href></Icon>
+<LatLonBox>
+<north>-20.440615</north>
+<east>-47.298621</east>
+<south>-20.636562</south>
+<west>-47.502805</west>
+</LatLonBox>
+</GroundOverlay>
+</Document>
+</kml>
