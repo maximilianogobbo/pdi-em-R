@@ -1,4 +1,0 @@
-bookdown::gitbook:
-  css: style.css
-  includes:
-    in_header: _header.html
