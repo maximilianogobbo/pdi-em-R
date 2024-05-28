@@ -1,0 +1,8 @@
+/* Adiciona estilos para o subtítulo */
+.subtitle {
+  font-size: 1.25em;
+  color: #666;
+  margin-top: -10px;
+  margin-bottom: 20px;
+  text-align: center;
+}
