@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 1: Introdução ao R, RStudio e RMarkdown</title>
+  <meta name="description" content="Capítulo 1: Introdução ao R, RStudio e RMarkdown" />
+  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 1: Introdução ao R, RStudio e RMarkdown" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 1: Introdução ao R, RStudio e RMarkdown" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.2.2/leaflet.js"></script>
+<script src="libs/leaflet-providers-2.0.0/leaflet-providers_2.0.0.js"></script>
+<script src="libs/leaflet-providers-plugin-2.2.2/leaflet-providers-plugin.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  var subtitles = document.querySelectorAll("h1 + .subtitle");
+  subtitles.forEach(function(subtitle) {
+    var h1 = subtitle.previousElementSibling;
+    h1.insertAdjacentElement('afterend', subtitle);
+  });
+});
+</script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path=""><a href="#capítulo-01---introdução-ao-r-rstudio-e-rmarkdown"><i class="fa fa-check"></i><b>1</b> Capítulo 01 - Introdução ao R, RStudio e RMarkdown</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path=""><a href="#referência-principal"><i class="fa fa-check"></i><b>1.1</b> Referência Principal</a></li>
+<li class="chapter" data-level="1.2" data-path=""><a href="#pastas-ou-diretório-de-trabalho"><i class="fa fa-check"></i><b>1.2</b> Pastas ou Diretório de trabalho</a></li>
+<li class="chapter" data-level="1.3" data-path=""><a href="#carregamento-de-pacotes-de-funções"><i class="fa fa-check"></i><b>1.3</b> Carregamento de pacotes de funções</a></li>
+<li class="chapter" data-level="1.4" data-path=""><a href="#operações-básicas-e-visualização-de-recursos"><i class="fa fa-check"></i><b>1.4</b> Operações básicas e visualização de recursos</a></li>
+<li class="chapter" data-level="1.5" data-path=""><a href="#referências-bibliográficas"><i class="fa fa-check"></i><b>1.5</b> Referências Bibliográficas</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Capítulo 1: Introdução ao R, RStudio e RMarkdown</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">Capítulo 1: Introdução ao R, RStudio e RMarkdown</h1>
+<h2 class="subtitle"><em>Processamento Digital de Imagens Orbitais</em></h2>
+</div>
+<div id="capítulo-01---introdução-ao-r-rstudio-e-rmarkdown" class="section level1 hasAnchor" number="1" style="text-align: justify;">
+<h1><span class="header-section-number">1</span> Capítulo 01 - Introdução ao R, RStudio e RMarkdown<a href="#capítulo-01---introdução-ao-r-rstudio-e-rmarkdown" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="referência-principal" class="section level2 hasAnchor" number="1.1">
+<h2><span class="header-section-number">1.1</span> Referência Principal<a href="#referência-principal" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>MENESES, P. R.; ALMEIDA, T. D.; ROSA, A. N. D. C. S.; SANO, E. E. et al. Introdução ao Processamento de Imagens de Sensoriamento Remoto. Brasília: UnB-CNPq, 276 p., 2012.</p>
+</div>
+<div id="pastas-ou-diretório-de-trabalho" class="section level2 hasAnchor" number="1.2">
+<h2><span class="header-section-number">1.2</span> Pastas ou Diretório de trabalho<a href="#pastas-ou-diretório-de-trabalho" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>A primeira etapa de trabalho é reconhecer em qual diretório de trabalho estamos operando. Para verificar qual a pasta do computador em que os documentos estão salvos, acessíveis para carregamento e onde todas as produções ficaram salvas, a função é <em>getwd()</em>. Nela não é preciso digitar nada, somente a função.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">getwd</span>()</span></code></pre></div>
+<pre><code>## [1] &quot;C:/ARQUIVOS COMPUTADOR/DOUTORADO/EBOOK PROCESSAMENTO DIGITAL DE IMAGENS&quot;</code></pre>
+<p>A função apresenta o caminho do diretório de trabalho (pasta no computador). Ressalvamos que a organização é a chave para manter todos os seus códigos/scripts, arquivos, figuras, imagens, mapeamentos, conjuntos de dados e resultados de pesquisa disponíveis para você. Recomendamos que todos os arquivos sejam salvos em uma única pasta, com nomes que não usem caracteres especiais ou acentos (ex.: <strong>arquivodetrabalho</strong> ao invés de <strong>arquivo_de_trabalho</strong>), de modo a facilitar seu uso no R.</p>
+<p>Caso esteja trabalhando em um computador que não é seu (um computador compartilhado) ou ainda não tenha criado um diretório para você, recomendamos a criação e a seleção deste diretório para o uso no R. Existem duas formas de fazer isso:</p>
+<ol style="list-style-type: decimal">
+<li><p>Você pode fazer manualmente no RStudio, seguindo este caminho: <em>Session</em> (Sessão) no menu superior &gt; Selecione <em>Set Working Directory</em> (Definir Diretório de Trabalho) &gt; Escolha uma das opções: <em>To Directory</em> (Para o Diretório) que permite navegar até o diretório desejado no seu sistema de arquivos ou <em>Choose Directory</em> (Escolher Diretório) que abre uma janela de seleção de diretório para escolher o diretório de trabalho.</p></li>
+<li><p>Se preferir, você pode fazer isso usando a estrutura de códigos atraves da função <em>setwd()</em> e inserir entre os parênteses o caminho da pasta disponibilizado em propriedades do arquivo/pasta do windows, como mostramos na sequência.</p></li>
+</ol>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co"># Define o diretório de trabalho para um caminho específico - copiar o caminho para a pasta em propriedades do arquivo/pasta</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;C:/ARQUIVOS COMPUTADOR/DOUTORADO/EBOOK PROCESSAMENTO DIGITAL DE IMAGENS&quot;</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="co"># Confira se a seleção do diretório foi realizada corretamente</span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="fu">getwd</span>()</span></code></pre></div>
+<pre><code>## [1] &quot;C:/ARQUIVOS COMPUTADOR/DOUTORADO/EBOOK PROCESSAMENTO DIGITAL DE IMAGENS&quot;</code></pre>
+<p>Realizadas estas operações estamos prontos para o trabalho. Vale retomar: **não esqueça de salvar todos os arquivos dentro desta pasta*. Seja qual for a extensão do arquivo (diferentes programas), deixe salvo nesta pasta para não perder nada. É possível fazer isso em um pendrive ou hd externo, se preferir; mas tome sempre o cuidado de conferir se o R está interpretando que você está trabalhando no diretório dos dois instrumentos. Sabemos que é difícil manter tudo junto quando se trata de organização, por isso lembre-se de usar nomes que facilitem seu entendimento na hora de buscar os arquivos necessários.</p>
+</div>
+<div id="carregamento-de-pacotes-de-funções" class="section level2 hasAnchor" number="1.3">
+<h2><span class="header-section-number">1.3</span> Carregamento de pacotes de funções<a href="#carregamento-de-pacotes-de-funções" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Para realizar a instalação de pacotes para as análises espaciais e geocomputacionais a função empregada é <em>install.packages()</em>, onde se insere o nome do pacote entre os parênteses. No código a seguir, instalaremos alguns pacotes funcionais para as análises que realizaremos ao longo do curso.</p>
+<p>Os pacotes instalados serão apresentados posteriormente, à medida que os utilizaremos no curso. O importante agora é entender como se dá a instalação e o carregamento dos pacotes de análise no RStudio. Após a instalação é preciso carregar o pacote. Para realizar o carregamento de pacotes, os quais envolvem diferentes funções e recursos para as análises, a função empregada é <em>library()</em>. Entre os parenteses da função, insere-se o nome do pacote a ser carregado, conforme ilustramos no código a seguir:</p>
+<p>No código acima, carregamos diferentes pacotes do R que estão associados às análises espaciais e geocomputacionais. Ao longo do curso, as exploraremos à medida que forem requeridas em nossas análises.</p>
+</div>
+<div id="operações-básicas-e-visualização-de-recursos" class="section level2 hasAnchor" number="1.4">
+<h2><span class="header-section-number">1.4</span> Operações básicas e visualização de recursos<a href="#operações-básicas-e-visualização-de-recursos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Neste ponto, vamos explorar algumas funções do R que são úteis nas análises espaciais. A primeira delas é o carregamento do conjunto de dados vetoriais, normalmente estruturados em tabelas (dados tabulares). Para o carregamento usamos a função <em>read_excel()</em> e criaremos um conjunto de dados usando um nome de identificação seguido de &lt;- para que R interprete a criação do conjunto. Baixamos os dados tabulares populacionais do Estado de São Paulo para a análise; o arquivo tem o nome <strong>populacao01.xls</strong> e foi indexado na pasta de trabalho.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">library</span>(readxl)</span></code></pre></div>
+<pre><code>## Warning: package &#39;readxl&#39; was built under R version 4.3.2</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>populacao01 <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;C:/ARQUIVOS COMPUTADOR/DOUTORADO/EBOOK PROCESSAMENTO DIGITAL DE IMAGENS/populacao01.xls&quot;</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>populacao01</span></code></pre></div>
+<pre><code>## # A tibble: 645 × 10
+##    municipio       `Área Urbanizada` `Área não Urbanizada` `Área Urbana Isolada`
+##    &lt;chr&gt;                       &lt;dbl&gt;                 &lt;dbl&gt;                 &lt;dbl&gt;
+##  1 ADAMANTINA                  31713                    55                   180
+##  2 ADOLFO                       3155                     0                    45
+##  3 AGUAÍ                       27261                   715                  1025
+##  4 ÁGUAS DA PRATA               5513                     0                  1258
+##  5 ÁGUAS DE LINDÓ…              6886                 10225                     0
+##  6 ÁGUAS DE SANTA…              3681                     0                   578
+##  7 ÁGUAS DE SÃO P…              2707                     0                     0
+##  8 AGUDOS                      32173                   659                   161
+##  9 ALAMBARI                     3036                     0                   636
+## 10 ALFREDO MARCON…              2690                   565                     0
+## # ℹ 635 more rows
+## # ℹ 6 more variables: `Área Rural (Exceto Aglomerado)` &lt;dbl&gt;,
+## #   `Aglomerado Rural de Extensão Urbana` &lt;dbl&gt;,
+## #   `Aglomerado Rural Povoado` &lt;dbl&gt;, `Aglomerado Rural Núcleo` &lt;dbl&gt;,
+## #   `Outros Aglomerados Rurais Raros` &lt;dbl&gt;,
+## #   `Código da Unidade Geográfica` &lt;dbl&gt;</code></pre>
+<p>Com os dados tabulares carregados em um objeto no R (dataframe), podemos realizar várias operações, desde a seleção de linhas e colunas, até a criação de novos conjuntos a partir desse.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="co">#Criando novos conjuntos selecionando colunas específicas do conjunto</span></span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>area_urbanizada <span class="ot">=</span> populacao01 [, <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">10</span>)] <span class="co">#selecionamos as colunas 1,3,10 do conjunto populacao01 e criamos um novo conjunto &quot;area_urbanizada&quot;</span></span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>area_urbanizada</span></code></pre></div>
+<pre><code>## # A tibble: 645 × 3
+##    municipio              `Área não Urbanizada` `Código da Unidade Geográfica`
+##    &lt;chr&gt;                                  &lt;dbl&gt;                          &lt;dbl&gt;
+##  1 ADAMANTINA                                55                        3500105
+##  2 ADOLFO                                     0                        3500204
+##  3 AGUAÍ                                    715                        3500303
+##  4 ÁGUAS DA PRATA                             0                        3500402
+##  5 ÁGUAS DE LINDÓIA                       10225                        3500501
+##  6 ÁGUAS DE SANTA BÁRBARA                     0                        3500550
+##  7 ÁGUAS DE SÃO PEDRO                         0                        3500600
+##  8 AGUDOS                                   659                        3500709
+##  9 ALAMBARI                                   0                        3500758
+## 10 ALFREDO MARCONDES                        565                        3500808
+## # ℹ 635 more rows</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="co">#verificando informações do conjunto</span></span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="fu">summary</span>(area_urbanizada)</span></code></pre></div>
+<pre><code>##   municipio         Área não Urbanizada Código da Unidade Geográfica
+##  Length:645         Min.   :    0       Min.   :3500105             
+##  Class :character   1st Qu.:    0       1st Qu.:3514601             
+##  Mode  :character   Median :    0       Median :3528700             
+##                     Mean   : 1048       Mean   :3528698             
+##                     3rd Qu.:   15       3rd Qu.:3543204             
+##                     Max.   :65912       Max.   :3557303</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="fu">names</span>(area_urbanizada)</span></code></pre></div>
+<pre><code>## [1] &quot;municipio&quot;                    &quot;Área não Urbanizada&quot;         
+## [3] &quot;Código da Unidade Geográfica&quot;</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="fu">crs</span>(area_urbanizada)</span></code></pre></div>
+<pre><code>## [1] NA</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="fu">ncell</span>(area_urbanizada)</span></code></pre></div>
+<pre><code>## [1] 1935</code></pre>
+<p>Essas informações são úteis para reconhecer que tipo de conjunto de dados estamos trabalhando e como as informações nele podem ser usadas para outras análises, o que chamamos de análise exploratória. Agora vamos carregar o outro conjunto que já está no diretório, cujo arquivo recebe o nome de <strong>localsp.xls</strong>. Criaremos o conjunto local sp para analisar as informações.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a>localsp <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;C:/ARQUIVOS COMPUTADOR/DOUTORADO/EBOOK PROCESSAMENTO DIGITAL DE IMAGENS/localsp.xls&quot;</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" tabindex="-1"></a>localsp</span></code></pre></div>
+<pre><code>## # A tibble: 2,142 × 21
+##       ID CD_GEOCODIGO TIPO   CD_GEOCODBA NM_BAIRRO CD_GEOCODSD CD_GEOCODDS
+##    &lt;dbl&gt;        &lt;dbl&gt; &lt;chr&gt;        &lt;dbl&gt; &lt;chr&gt;           &lt;dbl&gt;       &lt;dbl&gt;
+##  1 15316      3.50e14 URBANO          NA &lt;NA&gt;      35001050500   350010505
+##  2 15317      3.50e14 URBANO          NA &lt;NA&gt;      35001050500   350010505
+##  3 15318      3.50e14 URBANO          NA &lt;NA&gt;      35001050500   350010505
+##  4 15319      3.50e14 URBANO          NA &lt;NA&gt;      35001050500   350010505
+##  5 15320      3.50e14 URBANO          NA &lt;NA&gt;      35001050500   350010505
+##  6 15321      3.50e14 URBANO          NA &lt;NA&gt;      35001050500   350010505
+##  7 15322      3.50e14 URBANO          NA &lt;NA&gt;      35002040500   350020405
+##  8 15323      3.50e14 URBANO          NA &lt;NA&gt;      35002040500   350020405
+##  9 15324      3.50e14 URBANO          NA &lt;NA&gt;      35002040500   350020405
+## 10 15325      3.50e14 URBANO          NA &lt;NA&gt;      35003030500   350030305
+## # ℹ 2,132 more rows
+## # ℹ 14 more variables: NM_DISTRITO &lt;chr&gt;, CD_GEOCODMU &lt;dbl&gt;,
+## #   NM_MUNICIPIO &lt;chr&gt;, NM_MICRO &lt;chr&gt;, NM_MESO &lt;chr&gt;, NM_UF &lt;chr&gt;,
+## #   CD_NIVEL &lt;dbl&gt;, CD_CATEGORIA &lt;dbl&gt;, NM_CATEGORIA &lt;chr&gt;,
+## #   NM_LOCALIDADE &lt;chr&gt;, LONG &lt;dbl&gt;, LAT &lt;dbl&gt;, ALT &lt;dbl&gt;, GM_PONTO_sk &lt;chr&gt;</code></pre>
+<p>Neste conjunto notamos que existem algumas informações de posicionamento geográfico, como LONG, LAT e ALT, respectivamente, longitude, latitude e altitude. Aqui vamos conhecer a função <em>plot()</em>, a qual permite a plotagem de dados de acordo com os eixos X e Y. Usaremos somente LONG e LAT para espacializar os pontos referentes a cada uma das linhas do conjunto <strong>localsp</strong></p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="co">#plotagem do conjunto de dados utilizando long e lat (colunas 18 e 19 do conjunto localsp)</span></span>
+<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a><span class="fu">plot</span>(localsp[, (<span class="dv">18</span><span class="sc">:</span><span class="dv">19</span>)])</span></code></pre></div>
+<p><img src="cap01_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+A função <strong>plot()</strong> não se limita a este modelo de distribuição; pelo contrário, a função é muito poderosa, permitindo a construção de diferentes modelos. Confira usando o código a seguir.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="fu">example</span> (<span class="st">&quot;plot&quot;</span>)</span></code></pre></div>
+<pre><code>## 
+## plot&gt; nc = st_read(system.file(&quot;gpkg/nc.gpkg&quot;, package=&quot;sf&quot;), quiet = TRUE)
+## 
+## plot&gt; # plot single attribute, auto-legend:
+## plot&gt; plot(nc[&quot;SID74&quot;])</code></pre>
+<p><img src="cap01_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<pre><code>## 
+## plot&gt; # plot multiple:
+## plot&gt; plot(nc[c(&quot;SID74&quot;, &quot;SID79&quot;)]) # better use ggplot2::geom_sf to facet and get a single legend!</code></pre>
+<p><img src="cap01_files/figure-html/unnamed-chunk-10-2.png" width="672" /></p>
+<pre><code>## 
+## plot&gt; # adding to a plot of an sf object only works when using reset=FALSE in the first plot:
+## plot&gt; plot(nc[&quot;SID74&quot;], reset = FALSE)</code></pre>
+<pre><code>## 
+## plot&gt; plot(st_centroid(st_geometry(nc)), add = TRUE)</code></pre>
+<pre><code>## Warning in st_centroid.sfc(st_geometry(nc)): st_centroid does not give correct
+## centroids for longitude/latitude data</code></pre>
+<p><img src="cap01_files/figure-html/unnamed-chunk-10-3.png" width="672" /></p>
+<pre><code>## 
+## plot&gt; # log10 z-scale:
+## plot&gt; plot(nc[&quot;SID74&quot;], logz = TRUE, breaks = c(0,.5,1,1.5,2), at = c(0,.5,1,1.5,2))</code></pre>
+<p><img src="cap01_files/figure-html/unnamed-chunk-10-4.png" width="672" /></p>
+<pre><code>## 
+## plot&gt; # and we need to reset the plotting device after that, e.g. by
+## plot&gt; layout(1)
+## 
+## plot&gt; # when plotting only geometries, the reset=FALSE is not needed:
+## plot&gt; plot(st_geometry(nc))</code></pre>
+<p><img src="cap01_files/figure-html/unnamed-chunk-10-5.png" width="672" /></p>
+<pre><code>## 
+## plot&gt; plot(st_geometry(nc)[1], col = &#39;red&#39;, add = TRUE)
+## 
+## plot&gt; # add a custom legend to an arbitray plot:
+## plot&gt; layout(matrix(1:2, ncol = 2), widths = c(1, lcm(2)))
+## 
+## plot&gt; plot(1)</code></pre>
+<pre><code>## 
+## plot&gt; .image_scale(1:10, col = sf.colors(9), key.length = lcm(8), key.pos = 4, at = 1:10)</code></pre>
+<p><img src="cap01_files/figure-html/unnamed-chunk-10-6.png" width="672" /></p>
+<pre><code>## 
+## plot&gt; # manipulate plotting order, plot largest polygons first:
+## plot&gt; p = st_polygon(list(rbind(c(0,0), c(1,0), c(1,1), c(0,1), c(0,0))))
+## 
+## plot&gt; x = st_sf(a=1:4, st_sfc(p, p * 2, p * 3, p * 4)) # plot(x, col=2:5) only shows the largest polygon!
+## 
+## plot&gt; plot(x[order(st_area(x), decreasing = TRUE),], col = 2:5) # plot largest polygons first</code></pre>
+<p><img src="cap01_files/figure-html/unnamed-chunk-10-7.png" width="672" /></p>
+<pre><code>## 
+## plot&gt; sf.colors(10)
+##  [1] &quot;#0000B3FF&quot; &quot;#0400FFFF&quot; &quot;#4500FFFF&quot; &quot;#8500FFFF&quot; &quot;#C527D8FF&quot; &quot;#FF50AFFF&quot;
+##  [7] &quot;#FF7A85FF&quot; &quot;#FFA35CFF&quot; &quot;#FFCC33FF&quot; &quot;#FFF50AFF&quot;</code></pre>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" tabindex="-1"></a><span class="fu">example</span> (<span class="st">&quot;persp&quot;</span>)</span></code></pre></div>
+<pre><code>## 
+## persp&gt; r &lt;- raster(system.file(&quot;external/test.grd&quot;, package=&quot;raster&quot;))
+## 
+## persp&gt; persp(r)</code></pre>
+<p><img src="cap01_files/figure-html/unnamed-chunk-11-1.png" width="672" />
+Para conhecer outros modelos, convidamos você a acessar o meu “help” do RStudio, onde são apresentadas diferentes tipologias de dados em que se aplicam a função <em>plot()</em>, basta executar o código na sequência.</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" tabindex="-1"></a>?plot</span></code></pre></div>
+<pre><code>## starting httpd help server ... done</code></pre>
+<p>Outra função também usada para a criação de mapeamentos é a função <em>ggplot()</em>, que permite a criação de mapas de diferentes formatos usando os conjuntos de dados. Para ilustrar o funcionamento da função, utilizamos o conjunto <strong>localsp</strong> e as informações de latitude e longitude de referências. Realizamos alguns ajustes, como a alteração do nome dos eixos e do título (em <em>labs</em>), a determinação dos pontos em vermelho (color = “red”) e o tamanho dos pontos (size = 1). Confira a estrutura do código e o resultado gerado através da função <em>print()</em>.</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" tabindex="-1"></a><span class="co">#estruturando os pontos a serem plotados</span></span>
+<span id="cb38-2"><a href="#cb38-2" tabindex="-1"></a>pontos_sp <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb38-3"><a href="#cb38-3" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> localsp, <span class="fu">aes</span>(<span class="at">x =</span> localsp<span class="sc">$</span>LONG, <span class="at">y =</span> localsp<span class="sc">$</span>LAT), <span class="at">color =</span> <span class="st">&quot;red&quot;</span>, <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb38-4"><a href="#cb38-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Mapa com Pontos de Latitude e Longitude&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Longitude&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Latitude&quot;</span>)</span>
+<span id="cb38-5"><a href="#cb38-5" tabindex="-1"></a></span>
+<span id="cb38-6"><a href="#cb38-6" tabindex="-1"></a><span class="fu">print</span>(pontos_sp)</span></code></pre></div>
+<p><img src="cap01_files/figure-html/unnamed-chunk-13-1.png" width="672" />
+Para demostrar que podemos ampliar as camadas sobrepostas na função ggplot(), carregaremos um arquivo shapefile dos municipios de São Paulo para usar como fundo do nosso mapa. Primeiramente vamos carregar o arquivo shapefile.</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" tabindex="-1"></a><span class="co">#carregamento do shapefile</span></span>
+<span id="cb39-2"><a href="#cb39-2" tabindex="-1"></a>municipios_shp <span class="ot">&lt;-</span> <span class="fu">st_read</span> (<span class="st">&quot;sp_municipios.shp&quot;</span>)</span></code></pre></div>
+<pre><code>## Reading layer `sp_municipios&#39; from data source 
+##   `C:\ARQUIVOS COMPUTADOR\DOUTORADO\EBOOK PROCESSAMENTO DIGITAL DE IMAGENS\sp_municipios.shp&#39; 
+##   using driver `ESRI Shapefile&#39;
+## Simple feature collection with 645 features and 3 fields
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: -53.11011 ymin: -25.31232 xmax: -44.16137 ymax: -19.77966
+## Geodetic CRS:  SIRGAS 2000</code></pre>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" tabindex="-1"></a><span class="co">#conferência do carregamento</span></span>
+<span id="cb41-2"><a href="#cb41-2" tabindex="-1"></a>municipios_shp</span></code></pre></div>
+<pre><code>## Simple feature collection with 645 features and 3 fields
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: -53.11011 ymin: -25.31232 xmax: -44.16137 ymax: -19.77966
+## Geodetic CRS:  SIRGAS 2000
+## First 10 features:
+##      ID CD_GEOCODM                   NM_MUNICIP                       geometry
+## 1  1727    3500105                   ADAMANTINA MULTIPOLYGON (((-51.09093 -...
+## 2  1728    3500204                       ADOLFO MULTIPOLYGON (((-49.69668 -...
+## 3  1729    3500303                     AGUA\xcd MULTIPOLYGON (((-47.01254 -...
+## 4  1730    3500402            \xc1GUAS DA PRATA MULTIPOLYGON (((-46.73069 -...
+## 5  1731    3500501       \xc1GUAS DE LIND\xd3IA MULTIPOLYGON (((-46.635 -22...
+## 6  1732    3500550 \xc1GUAS DE SANTA B\xc1RBARA MULTIPOLYGON (((-49.28903 -...
+## 7  1733    3500600     \xc1GUAS DE S\xc3O PEDRO MULTIPOLYGON (((-47.86292 -...
+## 8  1734    3500709                       AGUDOS MULTIPOLYGON (((-49.0167 -2...
+## 9  1735    3500758                     ALAMBARI MULTIPOLYGON (((-47.86567 -...
+## 10 1736    3500808            ALFREDO MARCONDES MULTIPOLYGON (((-51.37102 -...</code></pre>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" tabindex="-1"></a><span class="co">#filtragem do conjunto para os atributos &quot;NM_MUNICIP&quot; (nome do município) e &quot;geometry&quot; (geometria)</span></span>
+<span id="cb43-2"><a href="#cb43-2" tabindex="-1"></a>cidades_shp <span class="ot">&lt;-</span> municipios_shp[, <span class="fu">c</span>(<span class="st">&quot;NM_MUNICIP&quot;</span>, <span class="st">&quot;geometry&quot;</span>)]</span>
+<span id="cb43-3"><a href="#cb43-3" tabindex="-1"></a></span>
+<span id="cb43-4"><a href="#cb43-4" tabindex="-1"></a><span class="co">#conferência do novo conjunto</span></span>
+<span id="cb43-5"><a href="#cb43-5" tabindex="-1"></a>cidades_shp</span></code></pre></div>
+<pre><code>## Simple feature collection with 645 features and 1 field
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: -53.11011 ymin: -25.31232 xmax: -44.16137 ymax: -19.77966
+## Geodetic CRS:  SIRGAS 2000
+## First 10 features:
+##                      NM_MUNICIP                       geometry
+## 1                    ADAMANTINA MULTIPOLYGON (((-51.09093 -...
+## 2                        ADOLFO MULTIPOLYGON (((-49.69668 -...
+## 3                      AGUA\xcd MULTIPOLYGON (((-47.01254 -...
+## 4             \xc1GUAS DA PRATA MULTIPOLYGON (((-46.73069 -...
+## 5        \xc1GUAS DE LIND\xd3IA MULTIPOLYGON (((-46.635 -22...
+## 6  \xc1GUAS DE SANTA B\xc1RBARA MULTIPOLYGON (((-49.28903 -...
+## 7      \xc1GUAS DE S\xc3O PEDRO MULTIPOLYGON (((-47.86292 -...
+## 8                        AGUDOS MULTIPOLYGON (((-49.0167 -2...
+## 9                      ALAMBARI MULTIPOLYGON (((-47.86567 -...
+## 10            ALFREDO MARCONDES MULTIPOLYGON (((-51.37102 -...</code></pre>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" tabindex="-1"></a><span class="co">#verificando a presença de sistema de referenciamento</span></span>
+<span id="cb45-2"><a href="#cb45-2" tabindex="-1"></a><span class="fu">crs</span>(cidades_shp)</span></code></pre></div>
+<pre><code>## [1] &quot;GEOGCRS[\&quot;SIRGAS 2000\&quot;,\n    DATUM[\&quot;Sistema de Referencia Geocentrico para las AmericaS 2000\&quot;,\n        ELLIPSOID[\&quot;GRS 1980\&quot;,6378137,298.257222101,\n            LENGTHUNIT[\&quot;metre\&quot;,1]]],\n    PRIMEM[\&quot;Greenwich\&quot;,0,\n        ANGLEUNIT[\&quot;degree\&quot;,0.0174532925199433]],\n    CS[ellipsoidal,2],\n        AXIS[\&quot;geodetic latitude (Lat)\&quot;,north,\n            ORDER[1],\n            ANGLEUNIT[\&quot;degree\&quot;,0.0174532925199433]],\n        AXIS[\&quot;geodetic longitude (Lon)\&quot;,east,\n            ORDER[2],\n            ANGLEUNIT[\&quot;degree\&quot;,0.0174532925199433]],\n    USAGE[\n        SCOPE[\&quot;Horizontal component of 3D system.\&quot;],\n        AREA[\&quot;Latin America - Central America and South America - onshore and offshore. Brazil - onshore and offshore.\&quot;],\n        BBOX[-59.87,-122.19,32.72,-25.28]],\n    ID[\&quot;EPSG\&quot;,4674]]&quot;</code></pre>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" tabindex="-1"></a><span class="co">#plotagem do conjunto, optando pela coloração cinza (gray)</span></span>
+<span id="cb47-2"><a href="#cb47-2" tabindex="-1"></a><span class="fu">plot</span>(cidades_shp, <span class="at">col =</span> <span class="st">&quot;gray&quot;</span>)</span></code></pre></div>
+<p><img src="cap01_files/figure-html/unnamed-chunk-14-1.png" width="672" />
+Após as análises, podemos utilizar o conjunto <strong>cidades_shp</strong> como camada de fundo para o mapeamento de pontos <strong>pontos_sp</strong>. Então vamos adicionar esta camada no mapeamento feito pela função <em>ggplot()</em>.</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" tabindex="-1"></a><span class="co">#estruturando os pontos a serem plotados</span></span>
+<span id="cb48-2"><a href="#cb48-2" tabindex="-1"></a>pontos_sp02 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb48-3"><a href="#cb48-3" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> cidades_shp, <span class="at">fill =</span> <span class="st">&quot;lightgray&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb48-4"><a href="#cb48-4" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> localsp, <span class="fu">aes</span>(<span class="at">x =</span> localsp<span class="sc">$</span>LONG, <span class="at">y =</span> localsp<span class="sc">$</span>LAT), <span class="at">color =</span> <span class="st">&quot;red&quot;</span>, <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb48-5"><a href="#cb48-5" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Mapa com Pontos de Latitude e Longitude&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Longitude&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Latitude&quot;</span>)</span>
+<span id="cb48-6"><a href="#cb48-6" tabindex="-1"></a></span>
+<span id="cb48-7"><a href="#cb48-7" tabindex="-1"></a><span class="fu">print</span>(pontos_sp02)</span></code></pre></div>
+<p><img src="cap01_files/figure-html/unnamed-chunk-15-1.png" width="672" />
+Agora temos uma camada com os recortes municipais do Estado de São Paulo e os pontos (que representam as áreas povoados do Estado).</p>
+<p>Os exemplos gerados até aqui são para ilustração e ambientação no R. Não se esgotam a eles e podem ser muito mais refinados, como demonstraremos ao longo do nosso curso. Mas, para deixar vocês ansiosos pelo que o R pode trazer, extraímos do livro <em>Geocomputation with R</em> (Geocomputação com o R), presente na Bibliografia da aula prática, um código que gera um mapeamento interativo. Execute o código e descubra como o R pode ser um recurso formidável de geocomputação.</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" tabindex="-1"></a><span class="fu">library</span>(leaflet)</span>
+<span id="cb49-2"><a href="#cb49-2" tabindex="-1"></a>popup <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;Robin&quot;</span>, <span class="st">&quot;Jakub&quot;</span>, <span class="st">&quot;Jannes&quot;</span>)</span>
+<span id="cb49-3"><a href="#cb49-3" tabindex="-1"></a><span class="fu">leaflet</span>() <span class="sc">|&gt;</span></span>
+<span id="cb49-4"><a href="#cb49-4" tabindex="-1"></a>  <span class="fu">addProviderTiles</span>(<span class="st">&quot;NASAGIBS.ViirsEarthAtNight2012&quot;</span>) <span class="sc">|&gt;</span></span>
+<span id="cb49-5"><a href="#cb49-5" tabindex="-1"></a>  <span class="fu">addMarkers</span>(<span class="at">lng =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">3</span>, <span class="dv">23</span>, <span class="dv">11</span>),</span>
+<span id="cb49-6"><a href="#cb49-6" tabindex="-1"></a>             <span class="at">lat =</span> <span class="fu">c</span>(<span class="dv">52</span>, <span class="dv">53</span>, <span class="dv">49</span>), </span>
+<span id="cb49-7"><a href="#cb49-7" tabindex="-1"></a>             <span class="at">popup =</span> popup)</span></code></pre></div>
+<div class="leaflet html-widget html-fill-item" id="htmlwidget-192f4eb8c32912cb52c2" style="width:672px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-192f4eb8c32912cb52c2">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["NASAGIBS.ViirsEarthAtNight2012",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addMarkers","args":[[52,53,49],[-3,23,11],null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},["Robin","Jakub","Jannes"],null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[49,53],"lng":[-3,23]}},"evals":[],"jsHooks":[]}</script>
+<p>Com isso, encerramos nossa primeira aula em R e esperamos que tenham aproveitado as dicas. Ao longo do curso exploraremos outros recursos e ampliaremos os conhecimentos sobre os temas aqui tratados.</p>
+<p><a href="index.html">Índice</a></p>
+<p><a href="capítulo-02---classificação-de-imagens-orbitais.html">Capítulo 02 - Classificação de Imagens Orbitais</a></p>
+</div>
+<div id="referências-bibliográficas" class="section level2 hasAnchor" number="1.5">
+<h2><span class="header-section-number">1.5</span> Referências Bibliográficas<a href="#referências-bibliográficas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>ANDERSON, E. C. Making Maps with R Â: Reproducible Research. GitHub, 2021. Disponível em: <a href="https://eriqande.github.io/rep-res-web/lectures/making-maps-with-R.html" class="uri">https://eriqande.github.io/rep-res-web/lectures/making-maps-with-R.html</a>.</p>
+<p>CHAMBERS, J. M. Extending R. CRC Press, 364p., 2017. ISBN: 9781498775724.</p>
+<p>DA SILVA, F. R.; GONÇALVES-SOUZA, T.; PATERNO, G. B.; PROVETE, D. B.; VANCINE, M. H. Análises ecológicas no R. Recife, PE: Nupeea, 1ª ed., 640p., 2022. ISBN: 9788579175640. Disponível em: <a href="https://analises-ecologicas.com/" class="uri">https://analises-ecologicas.com/</a>.</p>
+<p>GAUTHIER, N. Anthromes 12K DGG (V1) analysis code and R research compendium. Harvard Dataverse, 2021. DOI: <a href="https://doi.org/10.7910/DVN/6FWPZ9" class="uri">https://doi.org/10.7910/DVN/6FWPZ9</a>.</p>
+<p>LOVELACE, R. Introduction to visualizing spatial data in R. 2017. Disponível em:<a href="https://github.com/Robinlovelace/Creating-maps-in-R" class="uri">https://github.com/Robinlovelace/Creating-maps-in-R</a>.</p>
+<p>LOVELACE, R., NOWOSAD, J., &amp; MUENCHOW, J. Geocomputation with R. Chapman and Hall/CRC, 353p., 2019. Disponível em: <a href="https://www.routledge.com/Geocomputation-withR/Lovelace-Nowosad-Muenchow/p/book/9780367670573" class="uri">https://www.routledge.com/Geocomputation-withR/Lovelace-Nowosad-Muenchow/p/book/9780367670573</a></p>
+<p>MACHLIS, S. Create maps in R in 10 (fairly) easy steps. Computerworld, 2017. Disponível em: <a href="https://www.computerworld.com/article/3038270/create-maps-in-r-in-10-fairly-easy-steps.html" class="uri">https://www.computerworld.com/article/3038270/create-maps-in-r-in-10-fairly-easy-steps.html</a>.</p>
+<p>MARTOS, G. Cluster Analysis with R. 2021. Disponível em: <a href="https://rstudio-pubsstatic.s3.amazonaws.com/33876_1d7794d9a86647ca90c4f182df93f0e8.html" class="uri">https://rstudio-pubsstatic.s3.amazonaws.com/33876_1d7794d9a86647ca90c4f182df93f0e8.html</a>.</p>
+<p>MENESES, P. R.; ALMEIDA, T. D.; ROSA, A. N. D. C. S.; SANO, E. E. et al. Introdução ao Processamento de Imagens de Sensoriamento Remoto. Brasília: UnB-CNPq, 276 p., 2012.</p>
+<p>MORENO, M. &amp; BASILLE, M. Drawing beautiful maps programmatically with R, sf and ggplot2 - Part 1: Basics. 2021. Disponível em: <a href="https://r-spatial.org/r/2018/10/25/ggplot2-sf.html" class="uri">https://r-spatial.org/r/2018/10/25/ggplot2-sf.html</a>.</p>
+<p>MUENCHOW, J.; SCHRATZ, P.; BRENNING, A. RQGIS: Integrating R with QGIS for Statistical Geocomputing. The R Journal, 9, n. 2, p. 409-428, 2017 2017. Doi: <a href="https://doi.org/10.32614/RJ-2017-067" class="uri">https://doi.org/10.32614/RJ-2017-067</a>.</p>
+<p>NOVIA, D. Cluster Analysis in R: Tips for Great Analysis and Visualization. Datanovia, 2018.Disponível em: <a href="https://www.datanovia.com/en/blog/cluster-analysis-in-r-simplified-and-enhanced/" class="uri">https://www.datanovia.com/en/blog/cluster-analysis-in-r-simplified-and-enhanced/</a>.</p>
+<p>PEBESMA, E.; BIVAND, R. Spatial Data Science: With Applications in R. Chapman and Hall/CRC, 1ª ed., 314p., 2023. Doi: <a href="https://doi.org/10.1201/9780429459016" class="uri">https://doi.org/10.1201/9780429459016</a>.</p>
+<p>R-BLOGGERS. Cluster Analysis in R. 2021. Disponível em: <a href="https://www.rbloggers.com/2021/04/cluster-analysis-in-r/" class="uri">https://www.rbloggers.com/2021/04/cluster-analysis-in-r/</a>.</p>
+<p>STANIAK, M.; BIECEK, P. The Landscape of R Packages for Automated Exploratory Data Analysis. The R Journal, v. 11, n. 2, 23 p., 2019. Disponível em: <a href="https://arxiv.org/pdf/1904.02101" class="uri">https://arxiv.org/pdf/1904.02101</a>.</p>
+<p>VENABLES, W. N.; SMITH, D. M. An Introduction to R. R Core Team, 2017. Disponível em: <a href="http://colinfay.me/intro-to-r/#" class="uri">http://colinfay.me/intro-to-r/#</a>.</p>
+<p>WICKHAM, H. Advanced R. CRC Press, 2ª ed., 2022. Disponível em: <a href="https://advr.hadley.nz/#license" class="uri">https://advr.hadley.nz/#license</a></p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": false,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

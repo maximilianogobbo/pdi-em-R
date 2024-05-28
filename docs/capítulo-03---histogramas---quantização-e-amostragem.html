@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 03 - Histogramas - Quantização e Amostragem</title>
+  <meta name="description" content="Capítulo 03 - Histogramas - Quantização e Amostragem" />
+  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 03 - Histogramas - Quantização e Amostragem" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 03 - Histogramas - Quantização e Amostragem" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  var subtitles = document.querySelectorAll("h1 + .subtitle");
+  subtitles.forEach(function(subtitle) {
+    var h1 = subtitle.previousElementSibling;
+    h1.insertAdjacentElement('afterend', subtitle);
+  });
+});
+</script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path=""><a href="#capítulo-03---histogramas---quantização-e-amostragem"><i class="fa fa-check"></i><b>1</b> Capítulo 03 - Histogramas - Quantização e Amostragem</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path=""><a href="#gráficos-de-densidade"><i class="fa fa-check"></i><b>1.1</b> Gráficos de Densidade</a></li>
+<li class="chapter" data-level="1.2" data-path=""><a href="#histogramas"><i class="fa fa-check"></i><b>1.2</b> Histogramas</a></li>
+<li class="chapter" data-level="1.3" data-path=""><a href="#boxplot"><i class="fa fa-check"></i><b>1.3</b> Boxplot</a></li>
+<li class="chapter" data-level="1.4" data-path=""><a href="#estatísticas-associadas-ao-histogramas"><i class="fa fa-check"></i><b>1.4</b> Estatísticas associadas ao histogramas</a></li>
+<li class="chapter" data-level="1.5" data-path=""><a href="#referências-bibliográficas"><i class="fa fa-check"></i><b>1.5</b> Referências Bibliográficas</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Capítulo 03 - Histogramas - Quantização e Amostragem</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">Capítulo 03 - Histogramas - Quantização e Amostragem</h1>
+<h2 class="subtitle"><em>Processamento Digital de Imagens Orbitais</em></h2>
+</div>
+<div id="capítulo-03---histogramas---quantização-e-amostragem" class="section level1 hasAnchor" number="1" style="text-align: justify;">
+<h1><span class="header-section-number">1</span> Capítulo 03 - Histogramas - Quantização e Amostragem<a href="#capítulo-03---histogramas---quantização-e-amostragem" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Na aula de hoje iremos precisar dos pacotes a seguir. Então, antes de iniciar, realizem a instalação dos pocotes e o carregamento dos mesmos, como instruído no código a seguir.</p>
+<p>Antes de darmos início ao trabalho, vamos conferir se estamos trabalhando no diretório correto (pasta de trabalho).</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co">#conferindo o diretório de trabalho</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">getwd</span>()</span></code></pre></div>
+<pre><code>## [1] &quot;C:/ARQUIVOS COMPUTADOR/DOUTORADO/EBOOK PROCESSAMENTO DIGITAL DE IMAGENS&quot;</code></pre>
+<p>Com os pacotes instalados e carregados, vamos carregar novamente os arquivos que utilizamos na semana passada (imagem orbital e imagem orbital recortada). Utilizaremos os mesmos arquivos, portanto, o código a seguir é o mesmo da semana passada. Portanto, utilizaremos o arquivo <strong>CBERS_4_MUX_20231228_156_123_L4_BAND8.tif</strong>, imagem orbital disponibilizada pelo INPE, no acervo digital da instituição. Para o carregamento, a função será <em>raster()</em> com a especificação do nome do arquivo na pasta de trabalho. Após o carregamento, seguimos o mesmo procedimento de recorte da imagem, focalizando em uma área aleatoriamente definida dentro da imagem orbital.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co">#Carregamento da imagem orbital</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>imagem_orbital <span class="ot">&lt;-</span> <span class="fu">raster</span>(<span class="st">&quot;CBERS_4_MUX_20231228_156_123_L4_BAND8.tif&quot;</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="co">#Definindo a extensão geográfica da área de interesse </span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>aoi_extent <span class="ot">&lt;-</span> <span class="fu">extent</span>(<span class="fu">c</span>(<span class="at">xmin =</span> <span class="dv">196940</span>  , <span class="at">xmax =</span> <span class="dv">216940</span>   , <span class="at">ymin =</span> <span class="dv">7723010</span> , <span class="at">ymax =</span> <span class="dv">7743010</span> ))</span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="co">#Recortando a área de interesse</span></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>imagem_recortada <span class="ot">&lt;-</span> <span class="fu">crop</span>(imagem_orbital, <span class="fu">extent</span>(aoi_extent))</span></code></pre></div>
+<p>Realizado o recorte da imagem orbital, passamos à classificação. A seguir estão expressos os mesmos comando da semana anterior, somente para realizarmos a classificação.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># Obter os valores dos pixels</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>valores_pixels <span class="ot">&lt;-</span> raster<span class="sc">::</span><span class="fu">extract</span>(imagem_recortada, raster<span class="sc">::</span><span class="fu">extent</span>(imagem_recortada), <span class="at">buffer =</span> <span class="dv">500</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="co"># Normalizar os valores</span></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>valores_normalizados <span class="ot">&lt;-</span> <span class="fu">scale</span>(valores_pixels)</span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="co"># Remover valores ausentes dos dados normalizados</span></span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a>valores_normalizados[<span class="fu">is.na</span>(valores_normalizados)] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="co"># Ajustar o número de clusters para 7</span></span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a>num_clusters <span class="ot">&lt;-</span> <span class="dv">7</span></span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a><span class="co"># Realizar a clusterização com k-means</span></span>
+<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a>kmeans_result <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(valores_normalizados, <span class="at">centers =</span> num_clusters)</span>
+<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a></span>
+<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a><span class="co"># Atribuir rótulos aos clusters</span></span>
+<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a>rotulos_clusters <span class="ot">&lt;-</span> kmeans_result<span class="sc">$</span>cluster</span>
+<span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a></span>
+<span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a><span class="co"># Atribuir rótulos aos pixels</span></span>
+<span id="cb4-20"><a href="#cb4-20" tabindex="-1"></a>valores_atribuidos <span class="ot">&lt;-</span> <span class="fu">matrix</span>(rotulos_clusters, <span class="at">ncol =</span> <span class="fu">ncol</span>(imagem_recortada), <span class="at">nrow =</span> <span class="fu">nrow</span>(imagem_recortada), <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb4-21"><a href="#cb4-21" tabindex="-1"></a>imagem_agrupada <span class="ot">&lt;-</span> <span class="fu">setValues</span>(imagem_recortada, valores_atribuidos)</span>
+<span id="cb4-22"><a href="#cb4-22" tabindex="-1"></a></span>
+<span id="cb4-23"><a href="#cb4-23" tabindex="-1"></a><span class="co"># Visualizar a imagem original e a imagem agrupada</span></span>
+<span id="cb4-24"><a href="#cb4-24" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb4-25"><a href="#cb4-25" tabindex="-1"></a><span class="fu">plot</span>(imagem_recortada, <span class="at">main =</span> <span class="st">&quot;Imagem Original&quot;</span>)</span>
+<span id="cb4-26"><a href="#cb4-26" tabindex="-1"></a><span class="fu">plot</span>(imagem_agrupada, <span class="at">col =</span> <span class="fu">brewer.pal</span>(num_clusters, <span class="st">&quot;Set3&quot;</span>), <span class="at">main =</span> <span class="st">&quot;Imagem Agrupada&quot;</span>)</span></code></pre></div>
+<p><img src="cap03_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+Até aqui nenhuma novidade foi apresentada, mas precisamos deste material para dar continuidade à prática de hoje: <em>Histogramas: quantização e amostragem</em>. Nela vamos trazer alguns formatos para tal: <em>histogramas, gráficos de caixas ou gráficos de densidade</em>, os quais são úteis para examinar a distribuição dos valores de cada uma das classes (valores entre 0 e 255 que vimos na escala de cores).</p>
+<div id="gráficos-de-densidade" class="section level2 hasAnchor" number="1.1">
+<h2><span class="header-section-number">1.1</span> Gráficos de Densidade<a href="#gráficos-de-densidade" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Estes gráficos são úteis para analisar a distribuição dos valores (escala de cores) entre as classes (lembrando que definimos 7 classes na semana passada), oferecendo insights sobre padrões e variações nas diferentes classes.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co">#Supondo que a imagem agrupada já foi criada e é representada por &quot;imagem_agrupada&quot; e que os rótulos dos grupos estão na variável &quot;rotulos_clusters&quot;</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="co">#Converter a imagem agrupada para um dataframe</span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>df_imagem <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(imagem_agrupada)</span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>df_imagem<span class="sc">$</span>Classe <span class="ot">&lt;-</span> <span class="fu">factor</span>(rotulos_clusters)</span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="co">#Melt para formato longo </span></span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a><span class="co">#A função melt é utilizada para converter os dados do formato largo para o formato longo, permitindo uma manipulação e análise mais flexíveis dos dados. Neste contexto específico, a função melt foi usada para transformar a imagem agrupada de formato largo para longo antes de criar os gráficos de densidade separados para cada classe.</span></span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>df_melted <span class="ot">&lt;-</span> <span class="fu">melt</span>(df_imagem, <span class="at">id.vars =</span> <span class="st">&quot;Classe&quot;</span>, <span class="at">variable.name =</span> <span class="st">&quot;Pixel&quot;</span>, <span class="at">value.name =</span> <span class="st">&quot;Valor&quot;</span>)</span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a><span class="co"># Criar gráfico de densidade para cada classe com a paleta de cores</span></span>
+<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a><span class="fu">ggplot</span>(df_melted, <span class="fu">aes</span>(<span class="at">x =</span> Valor, <span class="at">fill =</span> Classe)) <span class="sc">+</span></span>
+<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Distribuicao dos Valores por Classe&quot;</span>,</span>
+<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Valor&quot;</span>,</span>
+<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Densidade&quot;</span>) <span class="sc">+</span></span>
+<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb5-18"><a href="#cb5-18" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">&quot;Set3&quot;</span>)</span></code></pre></div>
+<p><img src="cap03_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+</div>
+<div id="histogramas" class="section level2 hasAnchor" number="1.2">
+<h2><span class="header-section-number">1.2</span> Histogramas<a href="#histogramas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Em contexto de imagens orbitais ou raster, um histograma é uma representação gráfica da distribuição dos valores dos pixels na imagem. Ele exibe a frequência com que diferentes faixas de valores ocorrem. Cada barra no histograma representa um intervalo de valores, e a altura da barra indica quantos pixels na imagem têm valores dentro desse intervalo.</p>
+<p>No caso específico de imagens orbitais, o histograma pode oferecer insights sobre a distribuição de intensidades de pixel na imagem. Isso é útil para entender a variação de tons na imagem e pode ser usado para identificar padrões, características específicas ou até mesmo para realizar pré-processamento, como ajuste de contraste.</p>
+<p>Ao criar um histograma, é possível observar se a distribuição dos valores é uniforme, se existe uma tendência predominante ou se há picos que indicam a presença de determinadas características na imagem.</p>
+<p>Em um primeiro momento, vamos tentar criar nosso histograma somente com as informações constantes na imagem recortada e classificada. Neste caso, vamos desconsiderar a nossa classificação em 7 grupos para ver o que acontece. Usaremos Set3 como padrão de cores (o mesmo que estamos usando desde o início da aula), o qual aceita até 12 cores como padrão.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># Supondo que a imagem recortada já foi carregada e é representada por &quot;imagem_recortada&quot;</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="co"># Obter os valores dos pixels</span></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>valores_pixels <span class="ot">&lt;-</span> raster<span class="sc">::</span><span class="fu">extract</span>(imagem_recortada, raster<span class="sc">::</span><span class="fu">extent</span>(imagem_recortada), <span class="at">buffer =</span> <span class="dv">500</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="co"># Criar um data frame para o histograma</span></span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a>df_histograma <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Valor =</span> valores_pixels)</span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="co"># Criar o histograma</span></span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="fu">ggplot</span>(df_histograma, <span class="fu">aes</span>(<span class="at">x =</span> Valor, <span class="at">fill =</span> <span class="fu">factor</span>(Valor))) <span class="sc">+</span></span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>, <span class="at">position =</span> <span class="st">&quot;identity&quot;</span>) <span class="sc">+</span></span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Histograma da Imagem Recortada&quot;</span>,</span>
+<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Valor do Pixel&quot;</span>,</span>
+<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Frequencia&quot;</span>) <span class="sc">+</span></span>
+<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">&quot;Set3&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning: Removed 3 rows containing non-finite outside the scale range
+## (`stat_bin()`).</code></pre>
+<pre><code>## Warning in RColorBrewer::brewer.pal(n, pal): n too large, allowed maximum for palette Set3 is 12
+## Returning the palette you asked for with that many colors</code></pre>
+<p><img src="cap03_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>Ao executarmos o código sem classificação (agrupamento cluster), notamos que ocorre um aviso. Isto ocorre porque Set3 aceita 12 cores apenas e nós temos, na imagem orbital, um gradiente muito diverso de cores.</p>
+<p>Assim, vamos fazer duas considerações (ajustes). O primeiro vai ser considerando os nossos grupos (cluster) na construção do histograma. O código a seguir ilustra este formato.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="co"># Supondo que a imagem recortada já foi carregada e é representada por &quot;imagem_recortada&quot;</span></span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a><span class="co"># Obter os valores dos pixels</span></span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>valores_pixels <span class="ot">&lt;-</span> raster<span class="sc">::</span><span class="fu">extract</span>(imagem_recortada, raster<span class="sc">::</span><span class="fu">extent</span>(imagem_recortada), <span class="at">buffer =</span> <span class="dv">500</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a><span class="co"># Atribuir rótulos aos pixels</span></span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a>valores_atribuidos <span class="ot">&lt;-</span> <span class="fu">matrix</span>(rotulos_clusters, <span class="at">ncol =</span> <span class="fu">ncol</span>(imagem_recortada), <span class="at">nrow =</span> <span class="fu">nrow</span>(imagem_recortada), <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a><span class="co"># Criar um data frame para o histograma</span></span>
+<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a>df_histograma <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Valor =</span> valores_pixels, <span class="at">Classe =</span> <span class="fu">as.factor</span>(valores_atribuidos))</span>
+<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a></span>
+<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a><span class="co"># Remover valores não finitos</span></span>
+<span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a>df_histograma <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(df_histograma)</span>
+<span id="cb9-14"><a href="#cb9-14" tabindex="-1"></a></span>
+<span id="cb9-15"><a href="#cb9-15" tabindex="-1"></a><span class="co"># Criar o histograma com a paleta de cores &quot;Set3&quot;</span></span>
+<span id="cb9-16"><a href="#cb9-16" tabindex="-1"></a><span class="fu">ggplot</span>(df_histograma, <span class="fu">aes</span>(<span class="at">x =</span> Valor, <span class="at">fill =</span> Classe)) <span class="sc">+</span></span>
+<span id="cb9-17"><a href="#cb9-17" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>, <span class="at">position =</span> <span class="st">&quot;identity&quot;</span>) <span class="sc">+</span></span>
+<span id="cb9-18"><a href="#cb9-18" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Histograma da Imagem Recortada por Classe&quot;</span>,</span>
+<span id="cb9-19"><a href="#cb9-19" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Valor do Pixel&quot;</span>,</span>
+<span id="cb9-20"><a href="#cb9-20" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Frequencia&quot;</span>) <span class="sc">+</span></span>
+<span id="cb9-21"><a href="#cb9-21" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb9-22"><a href="#cb9-22" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">&quot;Set3&quot;</span>)</span></code></pre></div>
+<p><img src="cap03_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p>Este é nosso histograma com as classes. Para facilitar a visualização, vamos separar o histograma de cada classe na sequência.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="co"># Criar visualizações separadas para cada classe</span></span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="cf">for</span> (classe <span class="cf">in</span> <span class="fu">unique</span>(df_histograma<span class="sc">$</span>Classe)) {</span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>  df_classe <span class="ot">&lt;-</span> <span class="fu">subset</span>(df_histograma, Classe <span class="sc">==</span> classe)</span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>  </span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a>  <span class="co"># Criar o histograma mantendo as cores automáticas do ggplot2</span></span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a>  p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df_classe, <span class="fu">aes</span>(<span class="at">x =</span> Valor)) <span class="sc">+</span></span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">paste</span>(<span class="st">&quot;Histograma - Classe&quot;</span>, classe),</span>
+<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a>         <span class="at">x =</span> <span class="st">&quot;Valor do Pixel&quot;</span>,</span>
+<span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">&quot;Frequencia&quot;</span>) <span class="sc">+</span></span>
+<span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a>    <span class="fu">theme_minimal</span>()</span>
+<span id="cb10-12"><a href="#cb10-12" tabindex="-1"></a>  </span>
+<span id="cb10-13"><a href="#cb10-13" tabindex="-1"></a>  <span class="co"># Salvar cada gráfico em um arquivo separado</span></span>
+<span id="cb10-14"><a href="#cb10-14" tabindex="-1"></a>  <span class="fu">ggsave</span>(<span class="fu">paste</span>(<span class="st">&quot;histograma_classe_&quot;</span>, classe, <span class="st">&quot;.png&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>), <span class="at">plot =</span> p, <span class="at">device =</span> <span class="st">&quot;png&quot;</span>, <span class="at">width =</span> <span class="dv">6</span>, <span class="at">height =</span> <span class="dv">4</span>)</span>
+<span id="cb10-15"><a href="#cb10-15" tabindex="-1"></a>}</span></code></pre></div>
+<p>O segundo, vamos tentar realizar a construção do histograma sem determinar a paleta de cores (Set3) para analisarmos os resultados. Acompanhe na sequência.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="co"># Supondo que a imagem recortada já foi carregada e é representada por &quot;imagem_recortada&quot;</span></span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a><span class="co"># Obter os valores dos pixels</span></span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a>valores_pixels <span class="ot">&lt;-</span> raster<span class="sc">::</span><span class="fu">extract</span>(imagem_recortada, raster<span class="sc">::</span><span class="fu">extent</span>(imagem_recortada), <span class="at">buffer =</span> <span class="dv">500</span>)</span>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a><span class="co"># Remover valores não finitos</span></span>
+<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a>valores_pixels <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(valores_pixels)</span>
+<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a><span class="co"># Criar um data frame para o histograma</span></span>
+<span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a>df_histograma <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Valor =</span> valores_pixels)</span>
+<span id="cb11-11"><a href="#cb11-11" tabindex="-1"></a></span>
+<span id="cb11-12"><a href="#cb11-12" tabindex="-1"></a><span class="co"># Criar o histograma</span></span>
+<span id="cb11-13"><a href="#cb11-13" tabindex="-1"></a><span class="fu">ggplot</span>(df_histograma, <span class="fu">aes</span>(<span class="at">x =</span> Valor, <span class="at">fill =</span> <span class="fu">factor</span>(Valor))) <span class="sc">+</span></span>
+<span id="cb11-14"><a href="#cb11-14" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>, <span class="at">position =</span> <span class="st">&quot;identity&quot;</span>) <span class="sc">+</span></span>
+<span id="cb11-15"><a href="#cb11-15" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Histograma da Imagem Recortada&quot;</span>,</span>
+<span id="cb11-16"><a href="#cb11-16" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Valor do Pixel&quot;</span>,</span>
+<span id="cb11-17"><a href="#cb11-17" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Frequencia&quot;</span>) <span class="sc">+</span></span>
+<span id="cb11-18"><a href="#cb11-18" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb11-19"><a href="#cb11-19" tabindex="-1"></a>  <span class="fu">scale_fill_viridis</span>(<span class="at">discrete =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p><img src="cap03_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+</div>
+<div id="boxplot" class="section level2 hasAnchor" number="1.3">
+<h2><span class="header-section-number">1.3</span> Boxplot<a href="#boxplot" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Os gráficos de caixa (ou boxplots) são uma forma de visualização estatística que fornece uma representação compacta da distribuição de um conjunto de dados. Eles são úteis para visualizar a variação e a distribuição dos dados, destacando características como a mediana, quartis e a presença de possíveis valores atípicos.</p>
+<p>A estrutura básica de um gráfico de caixa inclui:</p>
+<p>Caixa (Box): Representa o intervalo interquartil (IQR), que contém a maioria dos dados. A caixa é dividida em quartis, com a linha interna representando a mediana.</p>
+<p>Bigodes (Whiskers): Linhas que se estendem para fora da caixa até um determinado limite. Podem indicar a extensão total dos dados ou serem limitados por valores específicos.</p>
+<p>Outliers: Pontos fora dos limites dos bigodes, que podem indicar valores atípicos ou extremos.</p>
+<p>Um gráfico de caixa é útil para identificar a dispersão dos dados e verificar a presença de valores atípicos. Pode ser gerado para cada classe ou grupo em um conjunto de dados para comparações visuais.Então vamos a análise da nossa imagem classificada através de boxplot.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="fu">ggplot</span>(df_melted, <span class="fu">aes</span>(<span class="at">x =</span> Classe, <span class="at">y =</span> Valor, <span class="at">fill =</span> <span class="fu">factor</span>(Classe))) <span class="sc">+</span></span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="fu">aes</span>(<span class="at">color =</span> <span class="fu">factor</span>(Classe)), <span class="at">position =</span> <span class="fu">position_jitter</span>(<span class="fl">0.2</span>), <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span>  <span class="co"># Adicionar pontos com cor</span></span>
+<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Boxplot da Imagem Agrupada&quot;</span>,</span>
+<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Classe&quot;</span>,</span>
+<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Valor do Pixel&quot;</span>) <span class="sc">+</span></span>
+<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a>  <span class="fu">scale_fill_viridis</span>(<span class="at">discrete =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb12-9"><a href="#cb12-9" tabindex="-1"></a>  <span class="fu">scale_color_viridis</span>(<span class="at">discrete =</span> <span class="cn">TRUE</span>)  <span class="co"># Adicionar escala de cores para os pontos</span></span></code></pre></div>
+<p><img src="cap03_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+</div>
+<div id="estatísticas-associadas-ao-histogramas" class="section level2 hasAnchor" number="1.4">
+<h2><span class="header-section-number">1.4</span> Estatísticas associadas ao histogramas<a href="#estatísticas-associadas-ao-histogramas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Com base no nosso histograma das 7 classes, vamos realizar algumas métricas estatísticas para analisá-lo. Começaremos com a <strong>média</strong>, como abordamos no código a seguir.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="co"># Criar um data frame com os valores e classes</span></span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>dados <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Valor =</span> valores_pixels, <span class="at">Classe =</span> rotulos_clusters)</span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a><span class="co"># Remover linhas com valores NA</span></span>
+<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a>dados <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(dados)</span>
+<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a><span class="co"># Calcular a média por classe</span></span>
+<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a>media_por_classe <span class="ot">&lt;-</span> <span class="fu">tapply</span>(dados<span class="sc">$</span>Valor, dados<span class="sc">$</span>Classe, mean)</span>
+<span id="cb13-9"><a href="#cb13-9" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" tabindex="-1"></a><span class="co"># Exibir a média por classe</span></span>
+<span id="cb13-11"><a href="#cb13-11" tabindex="-1"></a><span class="fu">print</span>(media_por_classe)</span></code></pre></div>
+<pre><code>##         1         2         3         4         5         6         7 
+## 125.42424  38.96176  96.90609 143.81388 111.31622 177.77346  75.50438</code></pre>
+<p>Os resultados acima representam as <strong>médias</strong> por classe. Agora vamos calcular os valores da <strong>mediana</strong>.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="co"># Calcular a mediana por classe</span></span>
+<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a>mediana_por_classe <span class="ot">&lt;-</span> <span class="fu">tapply</span>(dados<span class="sc">$</span>Valor, dados<span class="sc">$</span>Classe, median)</span>
+<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a><span class="co"># Exibir a mediana por classe</span></span>
+<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a><span class="fu">print</span>(mediana_por_classe)</span></code></pre></div>
+<pre><code>##   1   2   3   4   5   6   7 
+## 125  39  98 142 111 173  77</code></pre>
+<p>Os resultados apenas apresentados referem-se às <strong>medianas das classes</strong>. Outra métrica relevante é a <strong>variância</strong>, vamos ao cálculo.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="co"># Calcular a variância por classe</span></span>
+<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a>variancia_por_classe <span class="ot">&lt;-</span> <span class="fu">tapply</span>(dados<span class="sc">$</span>Valor, dados<span class="sc">$</span>Classe, var)</span>
+<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" tabindex="-1"></a><span class="co"># Exibir a variância por classe</span></span>
+<span id="cb17-5"><a href="#cb17-5" tabindex="-1"></a><span class="fu">print</span>(variancia_por_classe)</span></code></pre></div>
+<pre><code>##         1         2         3         4         5         6         7 
+##  20.46496 139.06933  24.88053  51.98816  15.86199 285.95684  66.26343</code></pre>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="co"># Criar o data frame</span></span>
+<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a>tabela_estatisticas <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb19-3"><a href="#cb19-3" tabindex="-1"></a>  <span class="at">Classe =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>,</span>
+<span id="cb19-4"><a href="#cb19-4" tabindex="-1"></a>  <span class="at">Mediana =</span> mediana_por_classe,</span>
+<span id="cb19-5"><a href="#cb19-5" tabindex="-1"></a>  <span class="at">Media =</span> media_por_classe,</span>
+<span id="cb19-6"><a href="#cb19-6" tabindex="-1"></a>  <span class="at">Variancia =</span> variancia_por_classe</span>
+<span id="cb19-7"><a href="#cb19-7" tabindex="-1"></a>)</span>
+<span id="cb19-8"><a href="#cb19-8" tabindex="-1"></a></span>
+<span id="cb19-9"><a href="#cb19-9" tabindex="-1"></a><span class="co"># Mostrar a tabela</span></span>
+<span id="cb19-10"><a href="#cb19-10" tabindex="-1"></a><span class="fu">print</span>(tabela_estatisticas)</span></code></pre></div>
+<pre><code>##   Classe Mediana     Media Variancia
+## 1      1     125 125.42424  20.46496
+## 2      2      39  38.96176 139.06933
+## 3      3      98  96.90609  24.88053
+## 4      4     142 143.81388  51.98816
+## 5      5     111 111.31622  15.86199
+## 6      6     173 177.77346 285.95684
+## 7      7      77  75.50438  66.26343</code></pre>
+<p>Estes valores representam a <strong>variância por classe</strong>. Com os três padrões gráficos e alguns exemplos de métricas estatísticas associadas às imagens orbitais, encerramos nossa prática de hoje. Vimos como gerar histogramas, gráficos de densidade e boxplots dentro do R para a quantização e amostragem dos dados provenientes das imagens orbitais e como usar algumas métricas para extrair informações sobre as imagens orbitais.</p>
+<p><a href="index.html">Índice</a></p>
+<p><a href="capítulo-02---classificação-de-imagens-orbitais.html">Capítulo 02 - Classificação de Imagens Orbitais</a></p>
+<p><a href="capítulo-04---filtragem-passa-baixa-e-passa-alta.html">Capítulo 04 - Filtragem: passa-baixa e passa-alta</a></p>
+</div>
+<div id="referências-bibliográficas" class="section level2 hasAnchor" number="1.5">
+<h2><span class="header-section-number">1.5</span> Referências Bibliográficas<a href="#referências-bibliográficas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>ANDERSON, E. C. Making Maps with R Â: Reproducible Research. GitHub, 2021. Disponível em: <a href="https://eriqande.github.io/rep-res-web/lectures/making-maps-with-R.html" class="uri">https://eriqande.github.io/rep-res-web/lectures/making-maps-with-R.html</a>.</p>
+<p>CHAMBERS, J. M. Extending R. CRC Press, 364p., 2017. ISBN: 9781498775724.</p>
+<p>DA SILVA, F. R.; GONÇALVES-SOUZA, T.; PATERNO, G. B.; PROVETE, D. B.; VANCINE, M. H. Análises ecológicas no R. Recife, PE: Nupeea, 1ª ed., 640p., 2022. ISBN: 9788579175640. Disponível em: <a href="https://analises-ecologicas.com/" class="uri">https://analises-ecologicas.com/</a>.</p>
+<p>GAUTHIER, N. Anthromes 12K DGG (V1) analysis code and R research compendium. Harvard Dataverse, 2021. DOI: <a href="https://doi.org/10.7910/DVN/6FWPZ9" class="uri">https://doi.org/10.7910/DVN/6FWPZ9</a>.</p>
+<p>LOVELACE, R. Introduction to visualizing spatial data in R. 2017. Disponível em:<a href="https://github.com/Robinlovelace/Creating-maps-in-R" class="uri">https://github.com/Robinlovelace/Creating-maps-in-R</a>.</p>
+<p>LOVELACE, R., NOWOSAD, J., &amp; MUENCHOW, J. Geocomputation with R. Chapman and Hall/CRC, 353p., 2019. Disponível em: <a href="https://www.routledge.com/Geocomputation-withR/Lovelace-Nowosad-Muenchow/p/book/9780367670573" class="uri">https://www.routledge.com/Geocomputation-withR/Lovelace-Nowosad-Muenchow/p/book/9780367670573</a></p>
+<p>MACHLIS, S. Create maps in R in 10 (fairly) easy steps. Computerworld, 2017. Disponível em: <a href="https://www.computerworld.com/article/3038270/create-maps-in-r-in-10-fairly-easy-steps.html" class="uri">https://www.computerworld.com/article/3038270/create-maps-in-r-in-10-fairly-easy-steps.html</a>.</p>
+<p>MARTOS, G. Cluster Analysis with R. 2021. Disponível em: <a href="https://rstudio-pubsstatic.s3.amazonaws.com/33876_1d7794d9a86647ca90c4f182df93f0e8.html" class="uri">https://rstudio-pubsstatic.s3.amazonaws.com/33876_1d7794d9a86647ca90c4f182df93f0e8.html</a>.</p>
+<p>MENESES, P. R.; ALMEIDA, T. D.; ROSA, A. N. D. C. S.; SANO, E. E. et al. Introdução ao Processamento de Imagens de Sensoriamento Remoto. Brasília: UnB-CNPq, 276 p., 2012.</p>
+<p>MORENO, M. &amp; BASILLE, M. Drawing beautiful maps programmatically with R, sf and ggplot2 - Part 1: Basics. 2021. Disponível em: <a href="https://r-spatial.org/r/2018/10/25/ggplot2-sf.html" class="uri">https://r-spatial.org/r/2018/10/25/ggplot2-sf.html</a>.</p>
+<p>MUENCHOW, J.; SCHRATZ, P.; BRENNING, A. RQGIS: Integrating R with QGIS for Statistical Geocomputing. The R Journal, 9, n. 2, p. 409-428, 2017 2017. Doi: <a href="https://doi.org/10.32614/RJ-2017-067" class="uri">https://doi.org/10.32614/RJ-2017-067</a>.</p>
+<p>NOVIA, D. Cluster Analysis in R: Tips for Great Analysis and Visualization. Datanovia, 2018.Disponível em: <a href="https://www.datanovia.com/en/blog/cluster-analysis-in-r-simplified-and-enhanced/" class="uri">https://www.datanovia.com/en/blog/cluster-analysis-in-r-simplified-and-enhanced/</a>.</p>
+<p>PEBESMA, E.; BIVAND, R. Spatial Data Science: With Applications in R. Chapman and Hall/CRC, 1ª ed., 314p., 2023. Doi: <a href="https://doi.org/10.1201/9780429459016" class="uri">https://doi.org/10.1201/9780429459016</a>.</p>
+<p>R-BLOGGERS. Cluster Analysis in R. 2021. Disponível em: <a href="https://www.rbloggers.com/2021/04/cluster-analysis-in-r/" class="uri">https://www.rbloggers.com/2021/04/cluster-analysis-in-r/</a>.</p>
+<p>STANIAK, M.; BIECEK, P. The Landscape of R Packages for Automated Exploratory Data Analysis. The R Journal, v. 11, n. 2, 23 p., 2019. Disponível em: <a href="https://arxiv.org/pdf/1904.02101" class="uri">https://arxiv.org/pdf/1904.02101</a>.</p>
+<p>VENABLES, W. N.; SMITH, D. M. An Introduction to R. R Core Team, 2017. Disponível em: <a href="http://colinfay.me/intro-to-r/#" class="uri">http://colinfay.me/intro-to-r/#</a>.</p>
+<p>WICKHAM, H. Advanced R. CRC Press, 2ª ed., 2022. Disponível em: <a href="https://advr.hadley.nz/#license" class="uri">https://advr.hadley.nz/#license</a></p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": false,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

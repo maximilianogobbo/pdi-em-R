@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 08 - Correção Geométrica e Registro de Imagens</title>
+  <meta name="description" content="Capítulo 08 - Correção Geométrica e Registro de Imagens" />
+  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 08 - Correção Geométrica e Registro de Imagens" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 08 - Correção Geométrica e Registro de Imagens" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  var subtitles = document.querySelectorAll("h1 + .subtitle");
+  subtitles.forEach(function(subtitle) {
+    var h1 = subtitle.previousElementSibling;
+    h1.insertAdjacentElement('afterend', subtitle);
+  });
+});
+</script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path=""><a href="#capítulo-08---correção-geométrica-e-registro-de-imagens"><i class="fa fa-check"></i><b>1</b> Capítulo 08 - Correção Geométrica e Registro de Imagens</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path=""><a href="#introdução"><i class="fa fa-check"></i><b>1.1</b> Introdução</a></li>
+<li class="chapter" data-level="1.2" data-path=""><a href="#correção-geométrica-e-registro-de-imagem-em-r"><i class="fa fa-check"></i><b>1.2</b> Correção Geométrica e Registro de Imagem em R</a></li>
+<li class="chapter" data-level="1.3" data-path=""><a href="#referências-bibliográficas"><i class="fa fa-check"></i><b>1.3</b> Referências Bibliográficas</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Capítulo 08 - Correção Geométrica e Registro de Imagens</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">Capítulo 08 - Correção Geométrica e Registro de Imagens</h1>
+<h2 class="subtitle"><em>Processamento Digital de Imagens Orbitais</em></h2>
+</div>
+<div id="capítulo-08---correção-geométrica-e-registro-de-imagens" class="section level1 hasAnchor" number="1" style="text-align: justify;">
+<h1><span class="header-section-number">1</span> Capítulo 08 - Correção Geométrica e Registro de Imagens<a href="#capítulo-08---correção-geométrica-e-registro-de-imagens" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Ref: Cap. VI, itens 6.2.3.1 e 6.2.3.2 - MENESES, P. R.; ALMEIDA, T. D.; ROSA, A. N. D. C. S.; SANO, E. E. et al. Introdução ao Processamento de Imagens de Sensoriamento Remoto. Brasília: UnB-CNPq, 276 p., 2012.</p>
+<div id="introdução" class="section level2 hasAnchor" number="1.1">
+<h2><span class="header-section-number">1.1</span> Introdução<a href="#introdução" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>A correção geométrica de imagens orbitais é essencial para garantir a precisão espacial dos dados em Processamento Digital de Imagens (PDI). Este processo corrige distorções causadas pela topografia, movimento orbital e características do sensor, com os seguintes objetivos principais:</p>
+<ul>
+<li>Correção de distorções geométricas: Ajusta deformações devido à topografia e ao ângulo de visão do sensor.</li>
+<li>Registro espacial: Assegura que os pixels correspondam corretamente às localizações geográficas.</li>
+<li>Compensação de movimentos orbitais e rotação da Terra: Corrige distorções oriundas do movimento do satélite e da rotação terrestre.</li>
+<li>Eliminação de efeitos atmosféricos: Minimiza distorções atmosféricas na imagem.</li>
+</ul>
+<p>A correção geométrica utiliza pontos de controle com coordenadas conhecidas para ajustar a imagem. Métodos comuns incluem o uso de Modelos Digitais de Elevação (MDE) e dados orbitais. No ambiente R, pacotes como raster e rgdal são utilizados para ler a imagem, identificar pontos de controle e realizar a correção geométrica. A precisão da correção depende da qualidade dos pontos de controle e do método empregado.</p>
+<p>O processo envolve a leitura da imagem, identificação dos pontos de controle, ajuste geométrico usando pacotes específicos e reprojeção da imagem. Pontos de controle são escolhidos por sua representatividade e precisão geográfica, obtidos através de medições de campo, mapas ou imagens georreferenciadas. Ferramentas como sp, sf, raster e rgdal no R são usadas para manipular e corrigir os dados espaciais.</p>
+<p>A eficácia da correção geométrica é avaliada pelo erro RMS, que mede a diferença entre as coordenadas estimadas e reais dos pontos de controle. O registro de imagens garante o alinhamento espacial correto, essencial para aplicações de sensoriamento remoto e análise espacial. Usar informações vetoriais, como shapefiles de limites geográficos, ajuda a orientar a correção geométrica, garantindo precisão no alinhamento da imagem com a estrutura geográfica existente.</p>
+</div>
+<div id="correção-geométrica-e-registro-de-imagem-em-r" class="section level2 hasAnchor" number="1.2">
+<h2><span class="header-section-number">1.2</span> Correção Geométrica e Registro de Imagem em R<a href="#correção-geométrica-e-registro-de-imagem-em-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Na aula de hoje iremos precisar dos pacotes a seguir. Então, antes de iniciar, realizem a instalação dos pocotes e o carregamento dos mesmos, como instruído no código a seguir.</p>
+<p>Além disso, vamos conferir se estamos trabalhando no diretório correto (pasta de trabalho). Caso não esteja no diretório de trabalho que estamos usando, faça a alteração executando <em>setwd()</em>.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co">#conferindo o diretório de trabalho</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">getwd</span>()</span></code></pre></div>
+<pre><code>## [1] &quot;C:/ARQUIVOS COMPUTADOR/DOUTORADO/EBOOK PROCESSAMENTO DIGITAL DE IMAGENS&quot;</code></pre>
+<p>Hoje vamos utilizar nossa imagem orbital <strong>CBERS_4_MUX_20231228_156_123_L4_BAND8.tif</strong>, mas reduziremos a resolução desta imagem para otimizar nosso processamento (tempo de máquina). O código a seguir ilustra o processo.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co"># Carregar a imagem orbital</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>imagem_orbital <span class="ot">&lt;-</span> <span class="fu">raster</span>(<span class="st">&quot;CBERS_4_MUX_20231228_156_123_L4_BAND8.tif&quot;</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="co"># Reduzir a resolução da imagem</span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>imagem_reduzida <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(imagem_orbital, <span class="at">fact =</span> <span class="dv">5</span>, <span class="at">fun =</span> mean)  <span class="co"># Fator 5 para redução</span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="co"># Plotar a imagem em escala de cinza</span></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="fu">plot</span>(imagem_reduzida, <span class="at">col =</span> <span class="fu">gray.colors</span>(<span class="dv">256</span>))</span></code></pre></div>
+<p><img src="cap08_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>Após o carregamento, vamos conferir se a imagem carregamento passou por algum pré-processamento, ou seja, se foi inserido nela algum sistema de coordenadas.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="fu">crs</span>(imagem_reduzida)</span></code></pre></div>
+<pre><code>## Coordinate Reference System:
+## Deprecated Proj.4 representation:
+##  +proj=utm +zone=23 +south +datum=WGS84 +units=m +no_defs 
+## WKT2 2019 representation:
+## PROJCRS[&quot;unknown&quot;,
+##     BASEGEOGCRS[&quot;unknown&quot;,
+##         DATUM[&quot;World Geodetic System 1984&quot;,
+##             ELLIPSOID[&quot;WGS 84&quot;,6378137,298.257223563,
+##                 LENGTHUNIT[&quot;metre&quot;,1]],
+##             ID[&quot;EPSG&quot;,6326]],
+##         PRIMEM[&quot;Greenwich&quot;,0,
+##             ANGLEUNIT[&quot;degree&quot;,0.0174532925199433],
+##             ID[&quot;EPSG&quot;,8901]]],
+##     CONVERSION[&quot;UTM zone 23S&quot;,
+##         METHOD[&quot;Transverse Mercator&quot;,
+##             ID[&quot;EPSG&quot;,9807]],
+##         PARAMETER[&quot;Latitude of natural origin&quot;,0,
+##             ANGLEUNIT[&quot;degree&quot;,0.0174532925199433],
+##             ID[&quot;EPSG&quot;,8801]],
+##         PARAMETER[&quot;Longitude of natural origin&quot;,-45,
+##             ANGLEUNIT[&quot;degree&quot;,0.0174532925199433],
+##             ID[&quot;EPSG&quot;,8802]],
+##         PARAMETER[&quot;Scale factor at natural origin&quot;,0.9996,
+##             SCALEUNIT[&quot;unity&quot;,1],
+##             ID[&quot;EPSG&quot;,8805]],
+##         PARAMETER[&quot;False easting&quot;,500000,
+##             LENGTHUNIT[&quot;metre&quot;,1],
+##             ID[&quot;EPSG&quot;,8806]],
+##         PARAMETER[&quot;False northing&quot;,10000000,
+##             LENGTHUNIT[&quot;metre&quot;,1],
+##             ID[&quot;EPSG&quot;,8807]],
+##         ID[&quot;EPSG&quot;,17023]],
+##     CS[Cartesian,2],
+##         AXIS[&quot;(E)&quot;,east,
+##             ORDER[1],
+##             LENGTHUNIT[&quot;metre&quot;,1,
+##                 ID[&quot;EPSG&quot;,9001]]],
+##         AXIS[&quot;(N)&quot;,north,
+##             ORDER[2],
+##             LENGTHUNIT[&quot;metre&quot;,1,
+##                 ID[&quot;EPSG&quot;,9001]]]]</code></pre>
+<p>Com base no resultado, observamos que a imagem já possui um sistema de coordenadas associado. O sistema de coordenadas é presentado em UTM, zona 23S, com o datum WGS84. Diante disso, vamos realizar dois ajustes geométricos. O primeiro será a substituição do sistema de coordenadas pelos SIRGAS2000, sem nenhum ponto de correção. No segundo, realizaremos a correção geométrica utilizando o shapefile dos municípios paulistas, tendo em vista que a imagem orbital focaliza-se nesta região.</p>
+<p>Para a correção geométrica através da substituição do sistema de coordenadas, seguiremos o código a seguir.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># Definir o sistema de coordenadas SIRGAS 2000 usando o código EPSG</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>novo_crs <span class="ot">&lt;-</span> <span class="fu">CRS</span>(<span class="st">&quot;+init=EPSG:31983&quot;</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="co"># Projetar a imagem para o novo sistema de coordenadas</span></span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>imagem_sirgas2000 <span class="ot">&lt;-</span> <span class="fu">projectRaster</span>(imagem_reduzida, <span class="at">crs =</span> novo_crs)</span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="co"># Verificar o sistema de coordenadas da imagem corrigida</span></span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="fu">crs</span>(imagem_sirgas2000)</span></code></pre></div>
+<pre><code>## Coordinate Reference System:
+## Deprecated Proj.4 representation:
+##  +proj=utm +zone=23 +south +ellps=GRS80 +units=m +no_defs 
+## WKT2 2019 representation:
+## PROJCRS[&quot;SIRGAS 2000 / UTM zone 23S&quot;,
+##     BASEGEOGCRS[&quot;SIRGAS 2000&quot;,
+##         DATUM[&quot;Sistema de Referencia Geocentrico para las AmericaS 2000&quot;,
+##             ELLIPSOID[&quot;GRS 1980&quot;,6378137,298.257222101,
+##                 LENGTHUNIT[&quot;metre&quot;,1]]],
+##         PRIMEM[&quot;Greenwich&quot;,0,
+##             ANGLEUNIT[&quot;degree&quot;,0.0174532925199433]],
+##         ID[&quot;EPSG&quot;,4674]],
+##     CONVERSION[&quot;UTM zone 23S&quot;,
+##         METHOD[&quot;Transverse Mercator&quot;,
+##             ID[&quot;EPSG&quot;,9807]],
+##         PARAMETER[&quot;Latitude of natural origin&quot;,0,
+##             ANGLEUNIT[&quot;degree&quot;,0.0174532925199433],
+##             ID[&quot;EPSG&quot;,8801]],
+##         PARAMETER[&quot;Longitude of natural origin&quot;,-45,
+##             ANGLEUNIT[&quot;degree&quot;,0.0174532925199433],
+##             ID[&quot;EPSG&quot;,8802]],
+##         PARAMETER[&quot;Scale factor at natural origin&quot;,0.9996,
+##             SCALEUNIT[&quot;unity&quot;,1],
+##             ID[&quot;EPSG&quot;,8805]],
+##         PARAMETER[&quot;False easting&quot;,500000,
+##             LENGTHUNIT[&quot;metre&quot;,1],
+##             ID[&quot;EPSG&quot;,8806]],
+##         PARAMETER[&quot;False northing&quot;,10000000,
+##             LENGTHUNIT[&quot;metre&quot;,1],
+##             ID[&quot;EPSG&quot;,8807]],
+##         ID[&quot;EPSG&quot;,16123]],
+##     CS[Cartesian,2],
+##         AXIS[&quot;(E)&quot;,east,
+##             ORDER[1],
+##             LENGTHUNIT[&quot;metre&quot;,1,
+##                 ID[&quot;EPSG&quot;,9001]]],
+##         AXIS[&quot;(N)&quot;,north,
+##             ORDER[2],
+##             LENGTHUNIT[&quot;metre&quot;,1,
+##                 ID[&quot;EPSG&quot;,9001]]],
+##     USAGE[
+##         SCOPE[&quot;unknown&quot;],
+##         AREA[&quot;Brazil - between 48°W and 42°W, northern and southern hemispheres, onshore and offshore.&quot;],
+##         BBOX[-33.5,-48,5.13,-42]]]</code></pre>
+<p>O código acima mostra que o sistema de coordenadas SIRGAS2000 foi aplicado à imagem orbital, portanto, nossa imagem_sirgas2000 foi reprojetada no plano segundo este sistema de referenciamento.Vamos comparar visualmente se a alteração do sistema de coordenadas da imagem refletiu significativamente na projeção desta imagem. O código a seguir realiza este procedimento.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="fu">plot</span>(imagem_reduzida, <span class="at">col =</span> <span class="fu">gray.colors</span>(<span class="dv">256</span>), <span class="at">main =</span> <span class="st">&quot;Imagem Reduzida&quot;</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="fu">plot</span>(imagem_sirgas2000, <span class="at">col =</span> <span class="fu">gray.colors</span>(<span class="dv">256</span>), <span class="at">main =</span> <span class="st">&quot;Imagem Corrigida (SIRGAS 2000)&quot;</span>)</span></code></pre></div>
+<p><img src="cap08_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>Conforme observamos, não houve mudança significativa na projeção da <strong>plot_sirgas2000</strong> quando comparada a <strong>plot_reduzida</strong>. Assim, vamos prosseguir a com a correção geométrica e adentrar nosso segundo passo.</p>
+<p>Neste momento precisamos estabelecer os pontos de correção, os quais representam pontos conhecidos na superfície para os quais conhecemos as coordenadas geográficas reais e que são empregados no ajuste geométrico da imagem orbital, de modo a alinhar a imagem orbital corretamente com as coordenadas geográficas.</p>
+<p>Esses pontos podem ser obtidos de diferentes fontes, como mapas georreferenciados, dados de GPS ou pontos de controle coletados em campo. Uma vez que se tenha os pontos de correção, pode-se usá-los juntamente com as funções em pacotes <em>rgdal</em> para realizar a correção geométrica.</p>
+<p>O shapefile pode ser usado como referência para selecionar e distribuir os pontos de correção na imagem orbital. Por exemplo, se o shapefile contiver informações sobre limites administrativos, como fronteiras municipais ou estaduais, você pode selecionar pontos de correção em locais estratégicos dentro desses limites.</p>
+<p>Além disso, se você tiver coordenadas geográficas conhecidas para esses pontos no shapefile, poderá usá-las diretamente como pontos de correção. Isso ajudará a garantir que a imagem orbital seja corrigida e alinhada corretamente com a área de interesse representada pelo shapefile.</p>
+<p>Portanto, o shapefile pode servir como uma ferramenta valiosa para orientar o processo de correção geométrica, fornecendo pontos de referência geográficos que podem ser usados para alinhar adequadamente a imagem orbital.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="co"># Definir o caminho para o arquivo shapefile (.shp)</span></span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>cidades_paulistas <span class="ot">&lt;-</span> <span class="st">&quot;sp_municipios.shp&quot;</span></span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a><span class="co"># Carregar o shapefile</span></span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a>dados_cidades_paulistas <span class="ot">&lt;-</span> <span class="fu">st_read</span>(cidades_paulistas)</span></code></pre></div>
+<pre><code>## Reading layer `sp_municipios&#39; from data source 
+##   `C:\ARQUIVOS COMPUTADOR\DOUTORADO\EBOOK PROCESSAMENTO DIGITAL DE IMAGENS\sp_municipios.shp&#39; 
+##   using driver `ESRI Shapefile&#39;
+## Simple feature collection with 645 features and 3 fields
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: -53.11011 ymin: -25.31232 xmax: -44.16137 ymax: -19.77966
+## Geodetic CRS:  SIRGAS 2000</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="co"># Exibir informações sobre o shapefile</span></span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="fu">print</span>(dados_cidades_paulistas)</span></code></pre></div>
+<pre><code>## Simple feature collection with 645 features and 3 fields
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: -53.11011 ymin: -25.31232 xmax: -44.16137 ymax: -19.77966
+## Geodetic CRS:  SIRGAS 2000
+## First 10 features:
+##      ID CD_GEOCODM                   NM_MUNICIP                       geometry
+## 1  1727    3500105                   ADAMANTINA MULTIPOLYGON (((-51.09093 -...
+## 2  1728    3500204                       ADOLFO MULTIPOLYGON (((-49.69668 -...
+## 3  1729    3500303                     AGUA\xcd MULTIPOLYGON (((-47.01254 -...
+## 4  1730    3500402            \xc1GUAS DA PRATA MULTIPOLYGON (((-46.73069 -...
+## 5  1731    3500501       \xc1GUAS DE LIND\xd3IA MULTIPOLYGON (((-46.635 -22...
+## 6  1732    3500550 \xc1GUAS DE SANTA B\xc1RBARA MULTIPOLYGON (((-49.28903 -...
+## 7  1733    3500600     \xc1GUAS DE S\xc3O PEDRO MULTIPOLYGON (((-47.86292 -...
+## 8  1734    3500709                       AGUDOS MULTIPOLYGON (((-49.0167 -2...
+## 9  1735    3500758                     ALAMBARI MULTIPOLYGON (((-47.86567 -...
+## 10 1736    3500808            ALFREDO MARCONDES MULTIPOLYGON (((-51.37102 -...</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="co"># Plotar o shapefile</span></span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a><span class="fu">plot</span>(dados_cidades_paulistas)</span></code></pre></div>
+<p><img src="cap08_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>Com os dados shapefile referente aos municípios paulistas carregados, vamos realizar uma filtragem por municípios que estão na nossa área de interesse, o que chamaremos de <strong>entorno_franca</strong>, tendo em vista que a cidade de Franca encontra-se no centro da imagem orbital. Acompanhe no código a seguir.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="co"># Filtrar o shapefile para selecionar apenas os dados do entorno de Franca</span></span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a>entorno_franca <span class="ot">&lt;-</span> <span class="fu">subset</span>(dados_cidades_paulistas, NM_MUNICIP <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;BATATAIS&quot;</span>, <span class="st">&quot;BURITIZAL&quot;</span>, <span class="st">&quot;CRISTAIS PAULISTA&quot;</span>, <span class="st">&quot;FRANCA&quot;</span>, <span class="st">&quot;IGARAPAVA&quot;</span>,  <span class="st">&quot;ITUVERAVA&quot;</span>, <span class="st">&quot;JERIQUARA&quot;</span>, <span class="st">&quot;PEDREGULHO&quot;</span>, <span class="st">&quot;RESTINGA&quot;</span>, <span class="st">&quot;RIFAINA&quot;</span>))</span>
+<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a><span class="co"># Visualizar os dados da cidade de Franca</span></span>
+<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a><span class="fu">print</span>(entorno_franca)</span></code></pre></div>
+<pre><code>## Simple feature collection with 10 features and 3 fields
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: -48.04027 ymin: -21.03843 xmax: -47.14346 ymax: -19.9607
+## Geodetic CRS:  SIRGAS 2000
+##       ID CD_GEOCODM        NM_MUNICIP                       geometry
+## 67  1793    3505906          BATATAIS MULTIPOLYGON (((-47.43263 -...
+## 94  1820    3508207         BURITIZAL MULTIPOLYGON (((-47.64544 -...
+## 147 1873    3513207 CRISTAIS PAULISTA MULTIPOLYGON (((-47.36814 -...
+## 186 1912    3516200            FRANCA MULTIPOLYGON (((-47.41682 -...
+## 230 1956    3520103         IGARAPAVA MULTIPOLYGON (((-47.86035 -...
+## 275 2001    3524105         ITUVERAVA MULTIPOLYGON (((-47.9233 -2...
+## 288 2014    3525409         JERIQUARA MULTIPOLYGON (((-47.62619 -...
+## 417 2143    3537008        PEDREGULHO MULTIPOLYGON (((-47.57243 -...
+## 479 2205    3542701          RESTINGA MULTIPOLYGON (((-47.44607 -...
+## 490 2216    3543600           RIFAINA MULTIPOLYGON (((-47.35998 -...</code></pre>
+<p>Para selecionar os pontos de correção, podemos usar os vértices das geometrias das cidades próximas a Franca. Para extrair os vértices das geometrias das cidades, podemos usar a função <em>st_coordinates</em> do pacote <em>sf</em>. Esta função extrai as coordenadas dos vértices de uma geometria. Posteriormente, precisamos convertê-los para as coordenadas do sistema de referência da imagem orbital antes de aplicá-los como pontos de controle.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="co"># Extrair os vértices das geometrias das cidades próximas a Franca</span></span>
+<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a>vertices_entorno <span class="ot">&lt;-</span> <span class="fu">st_coordinates</span>(entorno_franca<span class="sc">$</span>geometry)</span>
+<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a><span class="co"># Criar um objeto sf diretamente a partir dos vértices #Defina o CRS corretamente conforme necessário</span></span>
+<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a>vertices_entorno_sf <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(<span class="fu">data.frame</span>(<span class="at">lon =</span> vertices_entorno[,<span class="dv">1</span>], <span class="at">lat =</span> vertices_entorno[,<span class="dv">2</span>]), <span class="at">coords =</span> <span class="fu">c</span>(<span class="st">&quot;lon&quot;</span>, <span class="st">&quot;lat&quot;</span>), <span class="at">crs =</span> <span class="fu">st_crs</span>(<span class="st">&quot;EPSG:31983&quot;</span>)) </span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="co"># Extrair os vértices do raster imagem_sirgas2000</span></span>
+<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a>vertices_imagemsirgas <span class="ot">&lt;-</span> <span class="fu">rasterToPoints</span>(imagem_sirgas2000)</span>
+<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" tabindex="-1"></a><span class="co"># Criar um data frame com os vértices</span></span>
+<span id="cb17-5"><a href="#cb17-5" tabindex="-1"></a>vertices_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">X =</span> vertices_imagemsirgas[, <span class="dv">1</span>], <span class="at">Y =</span> vertices_imagemsirgas[, <span class="dv">2</span>])</span>
+<span id="cb17-6"><a href="#cb17-6" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" tabindex="-1"></a><span class="co"># Converter para um objeto sf</span></span>
+<span id="cb17-8"><a href="#cb17-8" tabindex="-1"></a>vertices_imagemsirgas_sf <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(vertices_df, <span class="at">coords =</span> <span class="fu">c</span>(<span class="st">&quot;X&quot;</span>, <span class="st">&quot;Y&quot;</span>), <span class="at">crs =</span> <span class="fu">st_crs</span>(imagem_sirgas2000))</span></code></pre></div>
+<p>Agora que temos os vértices convertidos em um objeto sf, podemos prosseguir para verificar quais desses pontos de vértice estão contidos na extensão da imagem orbital. Mas, antes de avançarmos, vamos comparar se <em>vertices_entorno_sf</em> e <em>vertices_imagemsirgas_sf</em> possuem o mesmo sistema de coordenadas geográficas e se possuem a mesma extensão (XY mínimo e máximo).</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="co"># Transformar o sistema de coordenadas dos pontos de controle para o mesmo sistema</span></span>
+<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a>vertices_entorno_sf_trans <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(vertices_entorno_sf, <span class="at">crs =</span> <span class="fu">st_crs</span>(vertices_imagemsirgas_sf))</span>
+<span id="cb18-3"><a href="#cb18-3" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" tabindex="-1"></a><span class="co"># Comparar CRS</span></span>
+<span id="cb18-5"><a href="#cb18-5" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">identical</span>(<span class="fu">st_crs</span>(vertices_entorno_sf_trans), <span class="fu">st_crs</span>(vertices_imagemsirgas_sf))) {</span>
+<span id="cb18-6"><a href="#cb18-6" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;Ambos os dataframes possuem o mesmo CRS.</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb18-7"><a href="#cb18-7" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb18-8"><a href="#cb18-8" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;Os dataframes possuem CRS diferentes.</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb18-9"><a href="#cb18-9" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## Ambos os dataframes possuem o mesmo CRS.</code></pre>
+<p>Conferido os crs dos conjuntos passamos à junção dos pontos correspondentes entre a nossa referência (vertices_entorno_sf_trans) e o nosso alvo (vertices_imagemsirgas_sf). Na sequência, iremos extrair as coordenadas do nosso conjunto <em>pontos_correspondentes</em>, que são os dados que possuem mesma posição na imagem.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="co"># Encontrar os pontos correspondentes nos conjuntos de dados de referência e alvo</span></span>
+<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a>pontos_correspondentes <span class="ot">&lt;-</span> <span class="fu">st_join</span>(vertices_entorno_sf_trans, vertices_imagemsirgas_sf, <span class="at">join =</span> st_nearest_feature)</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="co"># Extrair as coordenadas X e Y</span></span>
+<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a>coordenadas <span class="ot">&lt;-</span> <span class="fu">st_coordinates</span>(pontos_correspondentes)</span></code></pre></div>
+<p>Extraídas as coordenadas, passaremos à “construção do modelo linear” (2D) para correção da nossa imagem. O código a seguir ilustra o procedimento de construção (ajuste) do modelo linear, a extração dos coeficientes do modelo e a construção da matriz de transformação para correção geométrica. Após a construção da matriz de transformação, definiremos o crs para a imagem corrigida e aplicaremos a matriz de transformação para corrigir nossa imagem orbital.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="co"># Ajustar um modelo linear aos pontos de controle</span></span>
+<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a>modelo <span class="ot">&lt;-</span> <span class="fu">lm</span>(coordenadas[, <span class="st">&quot;Y&quot;</span>] <span class="sc">~</span> coordenadas[, <span class="st">&quot;X&quot;</span>])</span>
+<span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" tabindex="-1"></a><span class="co"># Extrair os coeficientes do modelo</span></span>
+<span id="cb22-5"><a href="#cb22-5" tabindex="-1"></a>coeficientes <span class="ot">&lt;-</span> <span class="fu">coef</span>(modelo)</span>
+<span id="cb22-6"><a href="#cb22-6" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="#cb22-7" tabindex="-1"></a><span class="co"># Extrair os coeficientes do modelo</span></span>
+<span id="cb22-8"><a href="#cb22-8" tabindex="-1"></a>a <span class="ot">&lt;-</span> coeficientes[<span class="dv">1</span>]</span>
+<span id="cb22-9"><a href="#cb22-9" tabindex="-1"></a>b <span class="ot">&lt;-</span> coeficientes[<span class="dv">2</span>]</span>
+<span id="cb22-10"><a href="#cb22-10" tabindex="-1"></a></span>
+<span id="cb22-11"><a href="#cb22-11" tabindex="-1"></a><span class="co"># Construir a matriz de transformação</span></span>
+<span id="cb22-12"><a href="#cb22-12" tabindex="-1"></a>transformacao <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(a, b, <span class="dv">0</span>, a), <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb22-13"><a href="#cb22-13" tabindex="-1"></a></span>
+<span id="cb22-14"><a href="#cb22-14" tabindex="-1"></a><span class="co"># Definir a matriz de transformação</span></span>
+<span id="cb22-15"><a href="#cb22-15" tabindex="-1"></a>matriz_afinidade <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(coeficientes[<span class="dv">2</span>], coeficientes[<span class="dv">4</span>], <span class="dv">0</span>, coeficientes[<span class="dv">1</span>], coeficientes[<span class="dv">3</span>], <span class="dv">0</span>), <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb22-16"><a href="#cb22-16" tabindex="-1"></a></span>
+<span id="cb22-17"><a href="#cb22-17" tabindex="-1"></a><span class="co"># Definir o CRS da imagem corrigida</span></span>
+<span id="cb22-18"><a href="#cb22-18" tabindex="-1"></a>crs_corrigida <span class="ot">&lt;-</span> <span class="fu">CRS</span>(<span class="st">&quot;+proj=utm +zone=23 +datum=WGS84 +units=m +no_defs&quot;</span>)</span>
+<span id="cb22-19"><a href="#cb22-19" tabindex="-1"></a></span>
+<span id="cb22-20"><a href="#cb22-20" tabindex="-1"></a><span class="co"># Aplicar a transformação à imagem alvo</span></span>
+<span id="cb22-21"><a href="#cb22-21" tabindex="-1"></a>imagem_corrigida <span class="ot">&lt;-</span> <span class="fu">projectRaster</span>(imagem_sirgas2000, <span class="at">crs =</span> crs_corrigida, <span class="at">transform =</span> matriz_afinidade)</span></code></pre></div>
+<p>Após a aplicação da matriz de transformação, vamos analisar visualmente como ficaram nossas imagens, antes e depois da correção geométrica.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a><span class="fu">plot</span>(imagem_corrigida, <span class="at">col =</span> <span class="fu">gray.colors</span>(<span class="dv">256</span>), <span class="at">main =</span> <span class="st">&quot;Imagem com Correcao Geometrica&quot;</span>)</span>
+<span id="cb23-3"><a href="#cb23-3" tabindex="-1"></a><span class="fu">plot</span>(imagem_sirgas2000, <span class="at">col =</span> <span class="fu">gray.colors</span>(<span class="dv">256</span>), <span class="at">main =</span> <span class="st">&quot;Imagem SIRGAS 2000&quot;</span>)</span></code></pre></div>
+<p><img src="cap08_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p>No contexto de processamento de imagens, o registro de imagens refere-se ao processo de alinhar duas ou mais imagens para que correspondam geometricamente umas às outras. Isso é importante em muitas aplicações, como em análise de mudanças ao longo do tempo, fusão de imagens de diferentes sensores ou fontes, e sobreposição de dados de diferentes modalidades para análises integradas.</p>
+<p>No nosso caso, você corrigimos geometricamente uma imagem para se alinhar com uma imagem de referência (SIRGAS 2000). Esse processo de correção geométrica pode ser considerado um tipo de registro de imagem, onde a imagem corrigida foi ajustada para se sobrepor adequadamente à imagem de referência. Isso é importante para garantir que as duas imagens estejam alinhadas corretamente, o que facilita a comparação e a análise conjunta das informações contidas nelas. E assim encerramos nossa prática sobre correção geométrica e registro de imagem.</p>
+<p><a href="index.html">Índice</a></p>
+<p><a href="capítulo-07---aritmética-de-bandas-soma-subtração-multiplicação-e-divisão.html">Capítulo 07 - Aritmética de Bandas: soma, subtração, multiplicação e divisão</a></p>
+<p><a href="capítulo-09---fusão-de-imagens.html">Capítulo 09 - Fusão de Imagens</a></p>
+</div>
+<div id="referências-bibliográficas" class="section level2 hasAnchor" number="1.3">
+<h2><span class="header-section-number">1.3</span> Referências Bibliográficas<a href="#referências-bibliográficas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>ANDERSON, E. C. Making Maps with R Â: Reproducible Research. GitHub, 2021. Disponível em: <a href="https://eriqande.github.io/rep-res-web/lectures/making-maps-with-R.html" class="uri">https://eriqande.github.io/rep-res-web/lectures/making-maps-with-R.html</a>.</p>
+<p>CHAMBERS, J. M. Extending R. CRC Press, 364p., 2017. ISBN: 9781498775724.</p>
+<p>DA SILVA, F. R.; GONÇALVES-SOUZA, T.; PATERNO, G. B.; PROVETE, D. B.; VANCINE, M. H. Análises ecológicas no R. Recife, PE: Nupeea, 1ª ed., 640p., 2022. ISBN: 9788579175640. Disponível em: <a href="https://analises-ecologicas.com/" class="uri">https://analises-ecologicas.com/</a>.</p>
+<p>GAUTHIER, N. Anthromes 12K DGG (V1) analysis code and R research compendium. Harvard Dataverse, 2021. DOI: <a href="https://doi.org/10.7910/DVN/6FWPZ9" class="uri">https://doi.org/10.7910/DVN/6FWPZ9</a>.</p>
+<p>LOVELACE, R. Introduction to visualizing spatial data in R. 2017. Disponível em:<a href="https://github.com/Robinlovelace/Creating-maps-in-R" class="uri">https://github.com/Robinlovelace/Creating-maps-in-R</a>.</p>
+<p>LOVELACE, R., NOWOSAD, J., &amp; MUENCHOW, J. Geocomputation with R. Chapman and Hall/CRC, 353p., 2019. Disponível em: <a href="https://www.routledge.com/Geocomputation-withR/Lovelace-Nowosad-Muenchow/p/book/9780367670573" class="uri">https://www.routledge.com/Geocomputation-withR/Lovelace-Nowosad-Muenchow/p/book/9780367670573</a></p>
+<p>MACHLIS, S. Create maps in R in 10 (fairly) easy steps. Computerworld, 2017. Disponível em: <a href="https://www.computerworld.com/article/3038270/create-maps-in-r-in-10-fairly-easy-steps.html" class="uri">https://www.computerworld.com/article/3038270/create-maps-in-r-in-10-fairly-easy-steps.html</a>.</p>
+<p>MARTOS, G. Cluster Analysis with R. 2021. Disponível em: <a href="https://rstudio-pubsstatic.s3.amazonaws.com/33876_1d7794d9a86647ca90c4f182df93f0e8.html" class="uri">https://rstudio-pubsstatic.s3.amazonaws.com/33876_1d7794d9a86647ca90c4f182df93f0e8.html</a>.</p>
+<p>MENESES, P. R.; ALMEIDA, T. D.; ROSA, A. N. D. C. S.; SANO, E. E. et al. Introdução ao Processamento de Imagens de Sensoriamento Remoto. Brasília: UnB-CNPq, 276 p., 2012.</p>
+<p>MORENO, M. &amp; BASILLE, M. Drawing beautiful maps programmatically with R, sf and ggplot2 - Part 1: Basics. 2021. Disponível em: <a href="https://r-spatial.org/r/2018/10/25/ggplot2-sf.html" class="uri">https://r-spatial.org/r/2018/10/25/ggplot2-sf.html</a>.</p>
+<p>MUENCHOW, J.; SCHRATZ, P.; BRENNING, A. RQGIS: Integrating R with QGIS for Statistical Geocomputing. The R Journal, 9, n. 2, p. 409-428, 2017 2017. Doi: <a href="https://doi.org/10.32614/RJ-2017-067" class="uri">https://doi.org/10.32614/RJ-2017-067</a>.</p>
+<p>NOVIA, D. Cluster Analysis in R: Tips for Great Analysis and Visualization. Datanovia, 2018.Disponível em: <a href="https://www.datanovia.com/en/blog/cluster-analysis-in-r-simplified-and-enhanced/" class="uri">https://www.datanovia.com/en/blog/cluster-analysis-in-r-simplified-and-enhanced/</a>.</p>
+<p>PEBESMA, E.; BIVAND, R. Spatial Data Science: With Applications in R. Chapman and Hall/CRC, 1ª ed., 314p., 2023. Doi: <a href="https://doi.org/10.1201/9780429459016" class="uri">https://doi.org/10.1201/9780429459016</a>.</p>
+<p>R-BLOGGERS. Cluster Analysis in R. 2021. Disponível em: <a href="https://www.rbloggers.com/2021/04/cluster-analysis-in-r/" class="uri">https://www.rbloggers.com/2021/04/cluster-analysis-in-r/</a>.</p>
+<p>STANIAK, M.; BIECEK, P. The Landscape of R Packages for Automated Exploratory Data Analysis. The R Journal, v. 11, n. 2, 23 p., 2019. Disponível em: <a href="https://arxiv.org/pdf/1904.02101" class="uri">https://arxiv.org/pdf/1904.02101</a>.</p>
+<p>VENABLES, W. N.; SMITH, D. M. An Introduction to R. R Core Team, 2017. Disponível em: <a href="http://colinfay.me/intro-to-r/#" class="uri">http://colinfay.me/intro-to-r/#</a>.</p>
+<p>WICKHAM, H. Advanced R. CRC Press, 2ª ed., 2022. Disponível em: <a href="https://advr.hadley.nz/#license" class="uri">https://advr.hadley.nz/#license</a></p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": false,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
