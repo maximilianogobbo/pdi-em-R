@@ -5,3 +5,14 @@ delete_merged_file: true
 language:
   ui:
     chapter_name: "Capítulo "
+html_files:
+  - "index.html"
+  - "capítulo-01---introdução-ao-r-rstudio-e-rmarkdown.html"
+  - "capítulo-02---classificação-de-imagens-orbitais.html"
+  - "capítulo-03---histogramas---quantização-e-amostragem.html"
+  - "capítulo-04---filtragem-passa-baixa-e-passa-alta.html"
+  - "capítulo-05---morfologia-matemática.html"
+  - "capítulo-06---transformação-no-espaço-imagem.html"
+  - "capítulo-07---aritmética-de-bandas-soma-subtração-multiplicação-e-divisão.html"
+  - "capítulo-08---correção-geométrica-e-registro-de-imagens.html"
+  - "capítulo-09---fusão-de-imagens.html"
