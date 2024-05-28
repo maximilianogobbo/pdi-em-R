@@ -1,9 +1,0 @@
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-  var subtitles = document.querySelectorAll("h1 + .subtitle");
-  subtitles.forEach(function(subtitle) {
-    var h1 = subtitle.previousElementSibling;
-    h1.insertAdjacentElement('afterend', subtitle);
-  });
-});
-</script>
