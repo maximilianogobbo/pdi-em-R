@@ -11,7 +11,6 @@ Este repositório está interligado ao livro **Processamento Digital de Imagens 
 *Referência completa: MENESES, P. R.; ALMEIDA, T. D.; ROSA, A. N. D. C. S.; SANO, E. E. et al. Introdução ao Processamento de Imagens de Sensoriamento Remoto. Brasília: UnB-CNPq, 276 p., 2012.
 
 Os dados vetoriais e raster, as imagens orbitais originais e recortadas e outros documentos utilizados neste livro foram captados de bases e plataformas globais, como o Instituto Nacional de Pesquisas Espaciais (INPE-Brasil), o Instituto Brasileiro de Geografia e Estatística (IBGE-Brasil) e o Copernicus. 
-The data used in this research were produced by the Brazilian Institute of Geography and Statistics (IBGE), to which we are immensely grateful for making this wide range of information available.
 
 ## Requisitos
 
